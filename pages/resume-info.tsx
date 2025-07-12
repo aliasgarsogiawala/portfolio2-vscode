@@ -87,7 +87,6 @@ const ResumeInfo = () => {
               display: 'flex',
               flexDirection: 'column'
             }}>
-              {/* Terminal Header */}
               <div style={{
                 background: '#2d2d30',
                 padding: '8px 12px',
@@ -126,7 +125,6 @@ const ResumeInfo = () => {
                   {terminalOutput}
                 </div>
                 
-                {/* Input Line */}
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <span style={{ color: '#4ec9b0', marginRight: '8px', fontSize: '13px' }}>
                     user@vscode:~/resume$
