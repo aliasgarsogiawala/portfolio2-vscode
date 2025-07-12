@@ -1,0 +1,215 @@
+.terminal {
+  position: fixed;
+  bottom: 25px; /* Above the bottom bar (25px height) */
+  left: 0;
+  right: 0;
+  background: #1e1e1e;
+  border-top: 1px solid #3c3c3c;
+  z-index: 999; /* Below modals but above everything else */
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+}
+
+.terminal.open {
+  transform: translateY(0);
+}
+
+.terminal.closed {
+  transform: translateY(100%);
+}
+
+.terminal.minimized {
+  height: 35px;
+}
+
+.terminalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2d2d30;
+  border-bottom: 1px solid #3c3c3c;
+  height: 35px;
+  padding: 0 8px;
+}
+
+.terminalTab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1e1e1e;
+  padding: 4px 12px;
+  border-radius: 4px 4px 0 0;
+  color: #cccccc;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.terminalIcon {
+  font-size: 14px;
+  color: #007acc;
+}
+
+.terminalControls {
+  display: flex;
+  gap: 4px;
+}
+
+.controlButton {
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.controlButton:hover {
+  background: #3c3c3c;
+}
+
+.terminalContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.terminalOutput {
+  flex: 1;
+  overflow-y: auto;
+  color: #cccccc;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.terminalOutput::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminalOutput::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.terminalOutput::-webkit-scrollbar-thumb {
+  background: #3c3c3c;
+  border-radius: 3px;
+}
+
+.terminalOutput::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.welcomeMessage {
+  color: #569cd6;
+  margin-bottom: 8px;
+}
+
+.welcomeMessage div {
+  margin-bottom: 2px;
+}
+
+.terminalOutput pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.terminalInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cccccc;
+  font-size: 13px;
+}
+
+.prompt {
+  color: #4ec9b0;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #cccccc;
+  font-size: 13px;
+  font-family: inherit;
+  caret-color: #cccccc;
+  padding: 0;
+  margin: 0;
+}
+
+.input::selection {
+  background: #264f78;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal {
+    height: 250px;
+  }
+  
+  .terminalContent {
+    padding: 8px;
+  }
+  
+  .terminalOutput,
+  .terminalInput,
+  .prompt,
+  .input {
+    font-size: 12px;
+  }
+  
+  .terminalTab {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal {
+    height: 200px;
+  }
+  
+  .prompt {
+    display: none;
+  }
+  
+  .terminalInput::before {
+    content: "$ ";
+    color: #4ec9b0;
+    font-weight: 500;
+  }
+}
+
+/* Terminal colors for different output types */
+.terminalOutput .error {
+  color: #f14c4c;
+}
+
+.terminalOutput .success {
+  color: #89d185;
+}
+
+.terminalOutput .warning {
+  color: #ffcc02;
+}
+
+.terminalOutput .info {
+  color: #569cd6;
+}

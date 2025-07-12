@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 
 import Layout from '@/components/Layout';
 import Head from '@/components/Head';
+import { TerminalProvider } from '@/contexts/TerminalContext';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
@@ -16,10 +17,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <Layout>
-      <Head title={`Aliasgar Sogiawala | ${pageProps.title}`} />
-      <Component {...pageProps} />
-    </Layout>
+    <TerminalProvider>
+      <Layout>
+        <Head title={`Aliasgar Sogiawala | ${pageProps.title}`} />
+        <Component {...pageProps} />
+      </Layout>
+    </TerminalProvider>
   );
 }
 

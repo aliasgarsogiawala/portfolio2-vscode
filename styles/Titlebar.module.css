@@ -28,6 +28,17 @@
   cursor: pointer;
 }
 
+.clickable {
+  padding: 0 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable:hover {
+  background: var(--titlebar-hover-bg);
+  border-radius: 3px;
+}
+
 .windowButtons {
   flex: 1;
   display: flex;
