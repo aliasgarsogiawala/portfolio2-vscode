@@ -2,39 +2,29 @@ import styles from '@/styles/ContactCode.module.css';
 
 const contactItems = [
   {
-    social: 'website',
-    link: 'nitinranganath.com',
-    href: 'https://nitinranganath.com',
-  },
-  {
     social: 'email',
-    link: 'nitinranganath@gmail.com',
-    href: 'mailto:nitinranganath@gmail.com',
+    link: 'aliasgarsogiawala@gmail.com',
+    href: 'mailto:aliasgarsogiawala@gmail.com',
   },
   {
     social: 'github',
-    link: 'itsnitinr',
-    href: 'https://github.com/itsnitinr',
+    link: 'aliasgarsogiawala',
+    href: 'https://github.com/aliasgarsogiawala',
   },
   {
     social: 'linkedin',
-    link: 'nitinranganath',
-    href: 'https://www.linkedin.com/in/nitinranganath/',
+    link: 'aliasgar-sogiawala',
+    href: 'https://www.linkedin.com/in/aliasgar-sogiawala/',
   },
   {
     social: 'twitter',
-    link: 'iamnitinr',
-    href: 'https://www.twitter.com/iamnitinr',
+    link: 'aliasgarsogiawala',
+    href: 'https://www.twitter.com/aliasgarsogiawala',
   },
   {
-    social: 'telegram',
-    link: 'iamnitinr',
-    href: 'https://t.me/iamnitinr',
-  },
-  {
-    social: 'peerlist',
-    link: 'nitinranganath',
-    href: 'https://peerlist.io/nitinranganath',
+    social: 'instagram',
+    link: 'aliasgarsogiawala',
+    href: 'https://www.instagram.com/aliasgarsogiawala',
   },
 ];
 
