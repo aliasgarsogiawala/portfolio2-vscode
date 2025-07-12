@@ -558,6 +558,108 @@
   }
 }
 
+/* Floating Tech Icons */
+.techIcon1, .techIcon2, .techIcon3, .techIcon4, .techIcon5, .techIcon6,
+.techIcon7, .techIcon8, .techIcon9, .techIcon10, .techIcon11, .techIcon12 {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.15;
+  animation: floatTech 20s infinite ease-in-out;
+  transition: opacity 0.3s ease;
+  filter: grayscale(20%) blur(0.5px);
+}
+
+.techIcon1 {
+  top: 12%;
+  right: 15%;
+  animation-delay: 0s;
+}
+
+.techIcon2 {
+  top: 25%;
+  left: 8%;
+  animation-delay: -3s;
+}
+
+.techIcon3 {
+  top: 45%;
+  right: 25%;
+  animation-delay: -6s;
+}
+
+.techIcon4 {
+  top: 65%;
+  left: 12%;
+  animation-delay: -9s;
+}
+
+.techIcon5 {
+  top: 15%;
+  left: 35%;
+  animation-delay: -12s;
+}
+
+.techIcon6 {
+  top: 75%;
+  right: 18%;
+  animation-delay: -15s;
+}
+
+.techIcon7 {
+  top: 35%;
+  right: 8%;
+  animation-delay: -18s;
+}
+
+.techIcon8 {
+  top: 80%;
+  left: 25%;
+  animation-delay: -21s;
+}
+
+.techIcon9 {
+  top: 8%;
+  left: 55%;
+  animation-delay: -24s;
+}
+
+.techIcon10 {
+  top: 55%;
+  left: 5%;
+  animation-delay: -27s;
+}
+
+.techIcon11 {
+  top: 25%;
+  right: 45%;
+  animation-delay: -30s;
+}
+
+.techIcon12 {
+  top: 60%;
+  right: 35%;
+  animation-delay: -33s;
+}
+
+@keyframes floatTech {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translateY(-15px) rotate(5deg) scale(1.05);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.15;
+  }
+  75% {
+    transform: translateY(15px) rotate(-5deg) scale(0.95);
+    opacity: 0.1;
+  }
+}
+
 @keyframes slidingGlow {
   0%,
   100% {
@@ -626,6 +728,38 @@
 
   .codeLine {
     font-size: 11px;
+  }
+
+  .developerName {
+    font-size: 3rem;
+  }
+
+  .developerRole {
+    font-size: 1.1rem;
+  }
+
+  .bio {
+    font-size: 1rem;
+  }
+
+  .codeBlock1,
+  .codeBlock2,
+  .codeBlock3,
+  .codeBlock4 {
+    opacity: 0.05;
+    font-size: 120px;
+  }
+
+  /* Reduce tech icon opacity and size on mobile */
+  .techIcon1, .techIcon2, .techIcon3, .techIcon4, .techIcon5, .techIcon6,
+  .techIcon7, .techIcon8, .techIcon9, .techIcon10, .techIcon11, .techIcon12 {
+    opacity: 0.08;
+    transform: scale(0.8);
+  }
+  
+  /* Hide some tech icons on mobile to reduce clutter */
+  .techIcon8, .techIcon9, .techIcon10, .techIcon11, .techIcon12 {
+    display: none;
   }
 
   .developerName {

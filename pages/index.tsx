@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { VscArrowRight } from 'react-icons/vsc';
 
 import styles from '@/styles/HomePage.module.css';
@@ -124,6 +125,44 @@ export default function HomePage() {
         <div className={styles.codeSymbol3}>{'=>'}</div>
         <div className={styles.dotPattern}></div>
         <div className={styles.mobileAccent}></div>
+        
+        {/* Floating Tech Icons */}
+        <div className={styles.techIcon1}>
+          <Image src="/logos/react_icon.svg" alt="React" width={32} height={32} />
+        </div>
+        <div className={styles.techIcon2}>
+          <Image src="/logos/nextjs_icon.svg" alt="Next.js" width={28} height={28} />
+        </div>
+        <div className={styles.techIcon3}>
+          <Image src="/logos/typescript_icon.svg" alt="TypeScript" width={30} height={30} />
+        </div>
+        <div className={styles.techIcon4}>
+          <Image src="/logos/python_icon.svg" alt="Python" width={32} height={32} />
+        </div>
+        <div className={styles.techIcon5}>
+          <Image src="/logos/nodejs_icon.svg" alt="Node.js" width={32} height={32} />
+        </div>
+        <div className={styles.techIcon6}>
+          <Image src="/logos/java_icon.svg" alt="Java" width={28} height={28} />
+        </div>
+        <div className={styles.techIcon7}>
+          <Image src="/logos/vercel.svg" alt="Vercel" width={30} height={30} />
+        </div>
+        <div className={styles.techIcon8}>
+          <Image src="/logos/git_icon.svg" alt="Git" width={28} height={28} />
+        </div>
+        <div className={styles.techIcon9}>
+          <Image src="/logos/github_icon.svg" alt="GitHub" width={30} height={30} />
+        </div>
+        <div className={styles.techIcon10}>
+          <Image src="/logos/js_icon.svg" alt="JavaScript" width={28} height={28} />
+        </div>
+        <div className={styles.techIcon11}>
+          <Image src="/logos/html_icon.svg" alt="HTML" width={26} height={26} />
+        </div>
+        <div className={styles.techIcon12}>
+          <Image src="/logos/css_icon.svg" alt="CSS" width={26} height={26} />
+        </div>
       </div>
     </div>
   );
