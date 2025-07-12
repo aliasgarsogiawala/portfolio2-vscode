@@ -38,8 +38,22 @@ const explorerItems = [
   },
 ];
 
+const resumeItems = [
+  {
+    name: 'resume.pdf',
+    path: '/resume-viewer',
+    icon: '/logos/pdf_icon.svg',
+  },
+  {
+    name: 'README.md',
+    path: '/resume-info',
+    icon: '/logos/markdown_icon.svg',
+  },
+];
+
 const Explorer = () => {
   const [portfolioOpen, setPortfolioOpen] = useState(true);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <div className={styles.explorer}>
@@ -64,6 +78,36 @@ const Explorer = () => {
           style={portfolioOpen ? { display: 'block' } : { display: 'none' }}
         >
           {explorerItems.map((item) => (
+            <Link href={item.path} key={item.name}>
+              <div className={styles.file}>
+                <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
+                <p>{item.name}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      
+      <div>
+        <input
+          type="checkbox"
+          className={styles.checkbox}
+          id="resume-checkbox"
+          checked={resumeOpen}
+          onChange={() => setResumeOpen(!resumeOpen)}
+        />
+        <label htmlFor="resume-checkbox" className={styles.heading}>
+          <VscChevronRight
+            className={styles.chevron}
+            style={resumeOpen ? { transform: 'rotate(90deg)' } : {}}
+          />
+          Resume
+        </label>
+        <div
+          className={styles.files}
+          style={resumeOpen ? { display: 'block' } : { display: 'none' }}
+        >
+          {resumeItems.map((item) => (
             <Link href={item.path} key={item.name}>
               <div className={styles.file}>
                 <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
