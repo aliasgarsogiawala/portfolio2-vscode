@@ -108,18 +108,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className={styles.splineContainer}>
-          <iframe 
-            src='https://app.spline.design/community/file/8cfb6748-f3dd-44dd-89fb-f46c7ab4186e' 
-            frameBorder='0' 
-            width='100%' 
-            height='100%'
-            className={styles.splineIframe}
-            loading="lazy"
-            title="3D Chatbot"
-            sandbox="allow-scripts allow-same-origin"
-          ></iframe>
-        </div>
+        
       </div>
 
       <div className={styles.decorElements}>
@@ -179,8 +168,3 @@ export default function HomePage() {
   );
 }
 
-export async function getStaticProps() {
-  return {
-    props: { title: 'Home' },
-  };
-}
