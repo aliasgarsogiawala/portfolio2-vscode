@@ -98,8 +98,7 @@ export default function HomePage() {
           <div className={styles.developerRole}>Full Stack Web Developer</div>
 
           <p className={styles.bio}>
-            I build elegant, responsive web applications with modern
-            technologies. Focused on clean code and intuitive user experiences.
+            Building modern web experiences and AI / ML solutions
           </p>
 
           <div className={styles.actionLinks}>
