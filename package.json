@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@splinetool/react-spline": "^4.0.0",
     "@types/nodemailer": "^6.4.17",
     "next": "^15.2.3",
     "nodemailer": "^7.0.5",

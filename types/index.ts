@@ -13,8 +13,12 @@ export interface Project {
   title: string;
   description: string;
   logo: string;
+  image: string;
   link: string;
+  githubLink?: string;
+  liveLink?: string;
   slug: string;
+  techStack: string[];
 }
 
 export interface Repo {

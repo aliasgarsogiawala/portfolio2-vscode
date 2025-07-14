@@ -1,0 +1,72 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="card-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg-gradient)"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#grid)"/>
+  
+  <!-- Main content area -->
+  <rect x="50" y="60" width="500" height="280" rx="12" fill="url(#card-gradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  
+  <!-- Header -->
+  <rect x="70" y="80" width="460" height="40" rx="8" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="90" cy="100" r="6" fill="#ff5f57"/>
+  <circle cx="110" cy="100" r="6" fill="#ffbd2e"/>
+  <circle cx="130" cy="100" r="6" fill="#28ca42"/>
+  
+  <!-- Navigation -->
+  <rect x="360" y="88" width="60" height="24" rx="12" fill="rgba(255,255,255,0.2)"/>
+  <rect x="430" y="88" width="60" height="24" rx="12" fill="rgba(116,75,162,0.3)"/>
+  
+  <!-- Content cards -->
+  <rect x="90" y="140" width="130" height="90" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <rect x="240" y="140" width="130" height="90" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <rect x="390" y="140" width="130" height="90" rx="8" fill="rgba(255,255,255,0.15)"/>
+  
+  <!-- Profile images in cards -->
+  <circle cx="155" cy="165" r="15" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="305" cy="165" r="15" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="455" cy="165" r="15" fill="rgba(255,255,255,0.3)"/>
+  
+  <!-- Text lines in cards -->
+  <rect x="105" y="185" width="100" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+  <rect x="105" y="195" width="80" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="105" y="205" width="90" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  
+  <rect x="255" y="185" width="100" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+  <rect x="255" y="195" width="80" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="255" y="205" width="90" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  
+  <rect x="405" y="185" width="100" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+  <rect x="405" y="195" width="80" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="405" y="205" width="90" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+  
+  <!-- Bottom section -->
+  <rect x="90" y="250" width="430" height="60" rx="8" fill="rgba(255,255,255,0.1)"/>
+  <rect x="110" y="270" width="150" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+  <rect x="110" y="285" width="200" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+  
+  <!-- Floating elements -->
+  <circle cx="520" cy="120" r="8" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="480" cy="80" r="5" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="150" cy="50" r="6" fill="rgba(255,255,255,0.2)"/>
+  
+  <!-- Title -->
+  <text x="300" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Driwwwle</text>
+</svg>
