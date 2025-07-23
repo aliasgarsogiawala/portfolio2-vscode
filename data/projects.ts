@@ -46,6 +46,6 @@ export const projects: Project[] = [
     githubLink: 'https://github.com/aliasgarsogiawala/portfolio1',
     liveLink: 'https://aliasgar.vercel.app',
     slug: 'portfolio-1',
-    techStack: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Icons', 'Nodemailer']
+    techStack: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Nodemailer']
   },
 ];
