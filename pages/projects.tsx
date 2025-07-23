@@ -6,25 +6,39 @@ import styles from '@/styles/ProjectsPage.module.css';
 
 const ProjectsPage = () => {
   const [filteredProjects, setFilteredProjects] = useState(projects);
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilters, setActiveFilters] = useState<string[]>(['All']);
   const [isVisible, setIsVisible] = useState(false);
 
   // Get unique tech stack items for filtering
   const allTechs = Array.from(new Set(projects.flatMap(project => project.techStack)));
-  const filters = ['All', ...allTechs.slice(0, 6)]; // Show first 6 unique techs
+  const filters = ['All', ...allTechs]; // Show all unique techs
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   const handleFilter = (filter: string) => {
-    setActiveFilter(filter);
     if (filter === 'All') {
+      setActiveFilters(['All']);
       setFilteredProjects(projects);
     } else {
-      setFilteredProjects(projects.filter(project => 
-        project.techStack.includes(filter)
-      ));
+      const newActiveFilters = activeFilters.includes('All') 
+        ? [filter] 
+        : activeFilters.includes(filter)
+          ? activeFilters.filter(f => f !== filter)
+          : [...activeFilters, filter];
+      
+      if (newActiveFilters.length === 0) {
+        setActiveFilters(['All']);
+        setFilteredProjects(projects);
+      } else {
+        setActiveFilters(newActiveFilters);
+        setFilteredProjects(projects.filter(project => 
+          newActiveFilters.some(activeFilter => 
+            project.techStack.includes(activeFilter)
+          )
+        ));
+      }
     }
   };
 
@@ -77,17 +91,30 @@ const ProjectsPage = () => {
 
       {/* Filter Section */}
       <div className={styles.filterSection}>
-        <h3 className={styles.filterTitle}>Filter by Technology</h3>
+        <div className={styles.filterHeader}>
+          <h3 className={styles.filterTitle}>Filter by Technology</h3>
+          {!activeFilters.includes('All') && activeFilters.length > 0 && (
+            <button 
+              className={styles.clearAllButton}
+              onClick={() => handleFilter('All')}
+            >
+              Clear All
+            </button>
+          )}
+        </div>
         <div className={styles.filterButtons}>
           {filters.map((filter) => (
             <button
               key={filter}
               className={`${styles.filterButton} ${
-                activeFilter === filter ? styles.active : ''
+                activeFilters.includes(filter) ? styles.active : ''
               }`}
               onClick={() => handleFilter(filter)}
             >
               {filter}
+              {activeFilters.includes(filter) && filter !== 'All' && (
+                <span className={styles.removeFilter}>×</span>
+              )}
             </button>
           ))}
         </div>
@@ -97,7 +124,12 @@ const ProjectsPage = () => {
       <div className={styles.projectsSection}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
-            {activeFilter === 'All' ? 'All Projects' : `Projects using ${activeFilter}`}
+            {activeFilters.includes('All') 
+              ? 'All Projects' 
+              : activeFilters.length === 1 
+                ? `Projects using ${activeFilters[0]}`
+                : `Projects using ${activeFilters.join(', ')}`
+            }
           </h2>
           <div className={styles.projectCount}>
             {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
@@ -114,6 +146,20 @@ const ProjectsPage = () => {
               <ProjectCard project={project} />
             </div>
           ))}
+        </div>
+
+        {/* View All Work Button */}
+        <div className={styles.viewAllSection}>
+          <a
+            href="https://github.com/aliasgarsogiawala"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.viewAllButton}
+          >
+            <span className={styles.buttonIcon}>🚀</span>
+            View All Work on GitHub
+            <span className={styles.buttonArrow}>→</span>
+          </a>
         </div>
       </div>
     </div>
