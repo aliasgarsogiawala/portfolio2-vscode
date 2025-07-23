@@ -12,7 +12,6 @@ export interface Article {
 export interface Project {
   title: string;
   description: string;
-  logo: string;
   image: string;
   link: string;
   githubLink?: string;

@@ -56,15 +56,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       {/* Project Content */}
       <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.logoWrapper}>
-            <Image
-              src={project.logo}
-              alt={`${project.title} logo`}
-              width={32}
-              height={32}
-              className={styles.logo}
-            />
-          </div>
+          
           <h3 className={styles.title}>{project.title}</h3>
         </div>
         

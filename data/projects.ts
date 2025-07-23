@@ -1,7 +1,6 @@
 export interface Project {
   title: string;
   description: string;
-  logo: string;
   image: string;
   link: string;
   githubLink?: string;
@@ -12,48 +11,41 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Driwwwle',
-    description:
-      'Discover creative websites and developers. A portal for you to share your projects and connect with other developers in the community.',
-    logo: '/logos/driwwwle.svg',
-    image: '/project-images/driwwwle.svg',
-    link: 'https://github.com/itsnitinr/driwwwle',
-    githubLink: 'https://github.com/itsnitinr/driwwwle',
-    slug: 'driwwwle',
-    techStack: ['Next.js', 'TypeScript', 'MongoDB', 'Tailwind CSS', 'Node.js']
+    title: 'TourSafe',
+    description: 'A website for tourists to avoid getting scammed including features like emergency sos, cab fare estimation, chatroom, etc.',
+    image: '/project-images/ts.png',
+    link: 'https://github.com/aliasgarsogiawala/toursafe',
+    liveLink: 'https://toursafe.in',
+    slug: 'toursafe',
+    techStack: ['Next.js', 'TypeScript', 'Neon', 'Tailwind CSS', 'Clerk', 'Vercel']
   },
   {
-    title: 'VSCode Portfolio',
-    description:
-      'A Visual Studio Code themed developer portfolio built with Next.js and CSS Modules. Features terminal interface and modern design.',
-    logo: '/logos/vsc.svg',
-    image: '/project-images/vscode-portfolio.svg',
-    link: 'https://github.com/itsnitinr/vscode-portfolio',
-    githubLink: 'https://github.com/itsnitinr/vscode-portfolio',
-    liveLink: 'https://vscode-portfolio-demo.vercel.app',
-    slug: 'vscode-portfolio',
-    techStack: ['Next.js', 'TypeScript', 'CSS Modules', 'React', 'Vercel']
+    title: 'Zillionite',
+    description:'Zillionite is a comprehensive wealth creation and management platform designed to guide users on their journey to financial prosperity.',
+    image: '/project-images/zil.png',
+    link: 'https://github.com/aliasgarsogiawala/zillionite',
+    liveLink: 'https://zillionite.com',
+    slug: 'zillionite',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Razorpay', ]
   },
   {
-    title: 'Subtrackt',
-    description:
-      'A simple and elegant way to track your subscriptions and save money. Manage all your recurring payments in one place.',
-    logo: '/logos/subtrackt.svg',
-    image: '/project-images/subtrackt.svg',
-    link: 'https://github.com/itsnitinr/subtrackt',
-    githubLink: 'https://github.com/itsnitinr/subtrackt',
-    slug: 'subtrackt',
-    techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Material-UI']
+    title: 'ParaDoc',
+    description:'A Parallel Reality Simulation for Medical Decision-Making. Hackathon winning project.',
+    image: '/project-images/paradoc.png',
+    link: 'https://github.com/aliasgarsogiawala/paradoc',
+    githubLink: 'https://github.com/aliasgarsogiawala/paradoc',
+    liveLink: 'https://paradocc.vercel.app',
+    slug: 'paradoc',
+    techStack: ['Next.js', 'Javascript', 'Clerk', 'Gemini API', 'Tailwind CSS']
   },
   {
-    title: 'Coolify Deployments',
-    description:
-      'VSCode extension to track and deploy your Coolify applications. Streamline your deployment workflow directly from VS Code.',
-    logo: '/logos/coolify.svg',
-    image: '/project-images/coolify-extension.svg',
-    link: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    githubLink: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    slug: 'coolify-vscode-extension',
-    techStack: ['TypeScript', 'VS Code API', 'Node.js', 'Docker', 'REST API']
+    title: 'Portfolio 1.0',
+    description:'A previous version of my portfolio for non tech people to view my work.',
+    image: '/project-images/portfolio.png',
+    link: 'https://github.com/aliasgarsogiawala/portfolio1',
+    githubLink: 'https://github.com/aliasgarsogiawala/portfolio1',
+    liveLink: 'https://aliasgar.vercel.app',
+    slug: 'portfolio-1',
+    techStack: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Icons', 'Nodemailer']
   },
 ];
