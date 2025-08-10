@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect, Suspense } from 'react';
-import dynamic from 'next/dynamic';
 import { slugToPluginId } from '../../src/plugins/utils';
 import { ALL_PLUGINS } from '../../src/plugins/registry';
 import { usePluginStore } from '../../src/plugins/store';
@@ -13,7 +12,7 @@ interface PluginPageProps {
 export default function PluginPage({ pluginSlug }: PluginPageProps) {
   const router = useRouter();
   const { isInstalled } = usePluginStore();
-  const [PluginComponent, setPluginComponent] = useState<React.ComponentType<any> | null>(null);
+  const [PluginComponent, setPluginComponent] = useState<React.ComponentType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,8 +40,8 @@ export default function PluginPage({ pluginSlug }: PluginPageProps) {
         }
 
         // Dynamically import the plugin component
-        const module = await plugin.component();
-        setPluginComponent(() => module.default);
+        const pluginModule = await plugin.component();
+        setPluginComponent(() => pluginModule.default);
       } catch (err) {
         console.error('Failed to load plugin:', err);
         setError('Failed to load plugin');

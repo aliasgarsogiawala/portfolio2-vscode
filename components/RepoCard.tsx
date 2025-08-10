@@ -4,7 +4,6 @@ import {
   VscStarEmpty,
   VscGithubAlt,
   VscLinkExternal,
-  VscTypeHierarchy,
   VscIssues,
   VscCalendar,
   VscTag,

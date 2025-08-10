@@ -4,11 +4,9 @@ import GitHubCalendar from 'react-github-calendar';
 import { 
   VscRepo, 
   VscPerson, 
-  VscEye, 
   VscRepoForked, 
   VscStarEmpty, 
   VscSearch,
-  VscFilter,
   VscCalendar,
   VscLink,
   VscLocation,
@@ -306,7 +304,7 @@ export async function getStaticProps() {
     const topRepos = allRepos.slice(0, 6);
 
     // Calculate total stats from all repositories
-    const totalStats = allRepos.reduce((stats: any, repo: any) => {
+    const totalStats = allRepos.reduce((stats: { totalStars: number; totalForks: number; totalWatchers: number }, repo: { stargazers_count?: number; forks?: number; watchers_count?: number }) => {
       stats.totalStars += repo.stargazers_count || 0;
       stats.totalForks += repo.forks || 0;
       stats.totalWatchers += repo.watchers_count || 0;

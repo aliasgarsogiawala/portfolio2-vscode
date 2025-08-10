@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import Head from '@/components/Head';
-import styles from '@/styles/ContactPage.module.css';
 
 const ResumeViewer = () => {
   return (

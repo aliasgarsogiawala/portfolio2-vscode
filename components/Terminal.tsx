@@ -100,7 +100,7 @@ const Terminal = () => {
               <div className={styles.welcomeMessage}>
                 <div>Last login: {new Date().toDateString()} {new Date().toLocaleTimeString()} on ttys000</div>
                 <div>Welcome to VS Code Terminal</div>
-                <div>Type 'help' for available commands.</div>
+                <div>Type &apos;help&apos; for available commands.</div>
                 <div></div>
               </div>
             )}

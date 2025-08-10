@@ -1,13 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { usePluginStore } from '../src/plugins/store';
 import PluginMarketplace from '../src/plugins/components/PluginMarketplace';
 import { Plugin } from '../src/plugins/types';
 import { useState } from 'react';
 
 export default function PluginsPage() {
-  const { getInstalledCount } = usePluginStore();
   const [selectedPlugin, setSelectedPlugin] = useState<Plugin | null>(null);
 
   return (

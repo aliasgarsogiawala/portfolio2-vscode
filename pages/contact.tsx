@@ -11,7 +11,7 @@ const ContactPage = () => {
       <div className={styles.layout}>
         <h1 className={styles.pageTitle}>Get In Touch</h1>
         <p className={styles.pageSubtitle}>
-          Have a project in mind or just want to chat? I'd love to hear from you! 
+          Have a project in mind or just want to chat? I&apos;d love to hear from you! 
           Send me a message using the form below or connect with me on social media.
         </p>
         

@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 export type PluginId = 
   | "volunteer-work" 
   | "research-papers" 
@@ -18,7 +16,7 @@ export interface Plugin {
   category: string;
   tags: string[];
   route: string;
-  component: () => Promise<{ default: React.ComponentType<any> }>;
+  component: () => Promise<{ default: React.ComponentType }>;
   isInstalled: boolean;
   installDate: string | null;
   size: string;

@@ -159,7 +159,7 @@ const Explorer = () => {
             className={styles.files}
             style={pluginsOpen ? { display: 'block' } : { display: 'none' }}
           >
-              {getInstalledPluginItems().map((item: any) => (
+              {getInstalledPluginItems().map((item) => item && (
               <Link href={item.path} key={item.name}>
                 <div className={styles.file}>
                   <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}

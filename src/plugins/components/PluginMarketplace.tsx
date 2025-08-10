@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Star, Download, Calendar, Package, Filter, Grid3X3, List } from 'lucide-react';
+import { Search, Star, Download, Package, Grid3X3, List } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Plugin } from '../types';
 import { ALL_PLUGINS } from '../registry';
@@ -89,7 +89,7 @@ export default function PluginMarketplace({ onPluginSelect }: PluginMarketplaceP
             {/* Sort */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as 'downloads' | 'rating' | 'date')}
               className="px-4 py-2 bg-[#3c3c3c] border border-gray-600 rounded-md text-white focus:border-blue-500 focus:outline-none"
             >
               <option value="downloads">Most Downloaded</option>

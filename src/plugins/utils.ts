@@ -40,7 +40,7 @@ export function safeLocalStorageGet<T>(key: string, defaultValue: T): T {
   }
 }
 
-export function safeLocalStorageSet(key: string, value: any): void {
+export function safeLocalStorageSet(key: string, value: unknown): void {
   if (typeof window === 'undefined') {
     return;
   }

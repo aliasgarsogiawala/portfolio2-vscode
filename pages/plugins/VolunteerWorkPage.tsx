@@ -48,7 +48,7 @@ const sampleVolunteerWork: VolunteerEntry[] = [
 ];
 
 export default function VolunteerWorkPage() {
-  const [volunteerWork, setVolunteerWork] = useState<VolunteerEntry[]>(sampleVolunteerWork);
+  const [volunteerWork] = useState<VolunteerEntry[]>(sampleVolunteerWork);
   const [isAddingNew, setIsAddingNew] = useState(false);
 
   const totalImpact = volunteerWork.reduce((sum, work) => sum + work.impact.length, 0);
