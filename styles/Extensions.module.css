@@ -1,0 +1,343 @@
+/* Extensions Panel */
+.extensionsPanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100vh;
+  background: #252526;
+  border-right: 1px solid #3c3c3c;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  color: #cccccc;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #cccccc;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #cccccc;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background: #3c3c3c;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #2d2d30;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  color: #cccccc;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.tab:hover {
+  background: #3c3c3c;
+}
+
+.tab.active {
+  color: #ffffff;
+  border-bottom-color: #007acc;
+  background: #37373d;
+}
+
+/* Search */
+.searchContainer {
+  position: relative;
+  padding: 12px 16px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #858585;
+}
+
+.searchInput {
+  width: 100%;
+  background: #3c3c3c;
+  border: 1px solid #3c3c3c;
+  border-radius: 2px;
+  padding: 6px 8px 6px 32px;
+  color: #cccccc;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+  border-color: #007acc;
+}
+
+.searchInput::placeholder {
+  color: #858585;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.marketplace,
+.installed {
+  padding: 0 16px;
+}
+
+/* Extension Card */
+.extensionCard {
+  background: #2d2d30;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+
+.extensionCard:hover {
+  background: #37373d;
+  border-color: #464647;
+}
+
+.installedCard {
+  border-color: #14432a;
+  background: #0d3015;
+}
+
+.installedCard:hover {
+  background: #113319;
+}
+
+.extensionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.extensionIcon {
+  flex-shrink: 0;
+}
+
+.iconPlaceholder {
+  width: 32px;
+  height: 32px;
+  background: #3c3c3c;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.extensionInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.extensionName {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: #cccccc;
+}
+
+.extensionAuthor {
+  font-size: 12px;
+  color: #858585;
+  margin: 0;
+}
+
+.installedBadge {
+  display: inline-block;
+  background: #14432a;
+  color: #4ec9b0;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.extensionDescription {
+  font-size: 12px;
+  color: #cccccc;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.extensionMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rating,
+.downloads {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #858585;
+}
+
+.starFilled {
+  color: #ffb000;
+  fill: #ffb000;
+}
+
+/* Action Buttons */
+.actionButton {
+  width: 100%;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.install {
+  background: #0e639c;
+  color: #ffffff;
+}
+
+.install:hover {
+  background: #1177bb;
+}
+
+.uninstall {
+  background: #a1260d;
+  color: #ffffff;
+}
+
+.uninstall:hover {
+  background: #c5341a;
+}
+
+.installedActions {
+  display: flex;
+  gap: 8px;
+}
+
+.uninstallButton {
+  background: #a1260d;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.uninstallButton:hover {
+  background: #c5341a;
+}
+
+.browseButton {
+  background: #0e639c;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.browseButton:hover {
+  background: #1177bb;
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 32px 16px;
+  color: #858585;
+}
+
+.emptyIcon {
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  margin: 0 0 8px 0;
+  color: #cccccc;
+  font-size: 16px;
+}
+
+.emptyState p {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+}
+
+/* Scrollbar */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #2d2d30;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #464647;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .extensionsPanel {
+    width: 100%;
+    max-width: 350px;
+  }
+}

@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import Layout from '@/components/Layout';
 import Head from '@/components/Head';
 import { TerminalProvider } from '@/contexts/TerminalContext';
+import { PluginProvider } from '@/src/plugins/store';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
@@ -17,12 +18,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <TerminalProvider>
-      <Layout>
-        <Head title={`Aliasgar Sogiawala | ${pageProps.title}`} />
-        <Component {...pageProps} />
-      </Layout>
-    </TerminalProvider>
+    <PluginProvider>
+      <TerminalProvider>
+        <Layout>
+          <Head title={`Aliasgar Sogiawala | ${pageProps.title}`} />
+          <Component {...pageProps} />
+        </Layout>
+      </TerminalProvider>
+    </PluginProvider>
   );
 }
 

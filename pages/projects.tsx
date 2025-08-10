@@ -9,9 +9,8 @@ const ProjectsPage = () => {
   const [activeFilters, setActiveFilters] = useState<string[]>(['All']);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Get unique tech stack items for filtering
   const allTechs = Array.from(new Set(projects.flatMap(project => project.techStack)));
-  const filters = ['All', ...allTechs]; // Show all unique techs
+  const filters = ['All', ...allTechs];
 
   useEffect(() => {
     setIsVisible(true);

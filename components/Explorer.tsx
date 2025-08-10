@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { VscChevronRight } from 'react-icons/vsc';
+import { VscChevronRight, VscExtensions } from 'react-icons/vsc';
+import { usePluginStore } from '@/src/plugins/store';
+import { ALL_PLUGINS } from '@/src/plugins/registry';
+import { pluginIdToSlug } from '@/src/plugins/utils';
 
 import styles from '@/styles/Explorer.module.css';
 
@@ -27,6 +30,11 @@ const explorerItems = [
     icon: '/logos/js_icon.svg',
   },
   {
+    name: 'techstack.json',
+    path: '/techstack',
+    icon: '/logos/json_icon.svg',
+  },
+  {
     name: 'github.md',
     path: '/github',
     icon: '/logos/markdown_icon.svg',
@@ -49,6 +57,22 @@ const resumeItems = [
 const Explorer = () => {
   const [portfolioOpen, setPortfolioOpen] = useState(true);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [pluginsOpen, setPluginsOpen] = useState(true);
+  const { installedPlugins } = usePluginStore();
+
+  const getInstalledPluginItems = () => {
+    return installedPlugins.map(pluginId => {
+      const plugin = ALL_PLUGINS.find(p => p.id === pluginId);
+      if (!plugin) return null;
+      
+      return {
+        name: `${plugin.name.toLowerCase().replace(/\s+/g, '-')}.plugin`,
+        path: `/plugins/${pluginIdToSlug(plugin.id)}`,
+        icon: '/logos/vscode_icon.svg', // Using VS Code icon for plugins
+        plugin: plugin
+      };
+    }).filter(Boolean);
+  };
 
   return (
     <div className={styles.explorer}>
@@ -112,6 +136,40 @@ const Explorer = () => {
           ))}
         </div>
       </div>
+
+      {/* Plugins Section */}
+      {installedPlugins.length > 0 && (
+        <div className={styles.pluginsSection}>
+          <input
+            type="checkbox"
+            className={styles.checkbox}
+            id="plugins-checkbox"
+            checked={pluginsOpen}
+            onChange={() => setPluginsOpen(!pluginsOpen)}
+          />
+          <label htmlFor="plugins-checkbox" className={styles.heading}>
+            <VscChevronRight
+              className={styles.chevron}
+              style={pluginsOpen ? { transform: 'rotate(90deg)' } : {}}
+            />
+            <VscExtensions style={{ marginRight: '4px' }} />
+            Plugins ({installedPlugins.length})
+          </label>
+          <div
+            className={styles.files}
+            style={pluginsOpen ? { display: 'block' } : { display: 'none' }}
+          >
+              {getInstalledPluginItems().map((item: any) => (
+              <Link href={item.path} key={item.name}>
+                <div className={styles.file}>
+                  <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
+                  <p>{item.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

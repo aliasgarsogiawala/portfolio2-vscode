@@ -70,6 +70,20 @@
   }
 }
 
+/* Section Spacing */
+.explorer > div {
+  margin-bottom: 1.5rem;
+}
+
+.explorer > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Plugins Section Styling */
+.pluginsSection {
+  margin-top: 1.5rem;
+}
+
 @media screen and (max-width: 600px) {
   .explorer {
     display: none;
