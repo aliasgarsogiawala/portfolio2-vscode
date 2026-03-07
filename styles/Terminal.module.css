@@ -1,18 +1,18 @@
 .terminal {
   position: fixed;
-  bottom: 25px; /* Above the bottom bar (25px height) */
+  bottom: 25px;
   left: 0;
   right: 0;
   background: #1e1e1e;
-  border-top: 1px solid #3c3c3c;
-  z-index: 999; /* Below modals but above everything else */
+  border-top: 2px solid #007acc;
+  z-index: 999;
   height: 300px;
   display: flex;
   flex-direction: column;
-  font-family: 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
   transform: translateY(100%);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .terminal.open {
@@ -25,8 +25,10 @@
 
 .terminal.minimized {
   height: 35px;
+  border-top-color: #3c3c3c;
 }
 
+/* Header */
 .terminalHeader {
   display: flex;
   justify-content: space-between;
@@ -35,6 +37,13 @@
   border-bottom: 1px solid #3c3c3c;
   height: 35px;
   padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.terminalTabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .terminalTab {
@@ -43,10 +52,28 @@
   gap: 6px;
   background: #1e1e1e;
   padding: 4px 12px;
-  border-radius: 4px 4px 0 0;
+  border-top: 1px solid #007acc;
   color: #cccccc;
   font-size: 12px;
   font-weight: 500;
+  border-radius: 0;
+}
+
+.terminalTabAdd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #8e9aab;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+
+.terminalTabAdd:hover {
+  background: #3c3c3c;
+  color: #ccc;
 }
 
 .terminalIcon {
@@ -56,32 +83,34 @@
 
 .terminalControls {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .controlButton {
   background: none;
   border: none;
-  color: #cccccc;
+  color: #8e9aab;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 2px;
+  padding: 4px 6px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  transition: background-color 0.2s;
+  font-size: 13px;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .controlButton:hover {
   background: #3c3c3c;
+  color: #ccc;
 }
 
+/* Content */
 .terminalContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 8px 14px;
   overflow: hidden;
 }
 
@@ -90,8 +119,8 @@
   overflow-y: auto;
   color: #cccccc;
   font-size: 13px;
-  line-height: 1.4;
-  margin-bottom: 8px;
+  line-height: 1.5;
+  margin-bottom: 6px;
 }
 
 .terminalOutput::-webkit-scrollbar {
@@ -103,7 +132,7 @@
 }
 
 .terminalOutput::-webkit-scrollbar-thumb {
-  background: #3c3c3c;
+  background: #424242;
   border-radius: 3px;
 }
 
@@ -111,34 +140,114 @@
   background: #555;
 }
 
+/* Welcome message */
 .welcomeMessage {
-  color: #569cd6;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.welcomeMessage div {
+.ascii {
+  color: #007acc;
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.welcomeInfo {
+  color: #8e9aab;
+  font-size: 12px;
   margin-bottom: 2px;
 }
 
-.terminalOutput pre {
-  margin: 0;
-  font-family: inherit;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+.accent {
+  color: var(--accent-color, #f9826c);
 }
 
-.terminalInput {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #cccccc;
+/* Lines */
+.line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.5;
   font-size: 13px;
 }
 
-.prompt {
+.output {
+  color: #cccccc;
+}
+
+.input {
   color: #4ec9b0;
+}
+
+.error {
+  color: #f14c4c;
+}
+
+.success {
+  color: #89d185;
+}
+
+.info {
+  color: #569cd6;
+}
+
+.matrix {
+  color: #00ff41;
+  font-size: 11px;
+  animation: matrixFade 0.5s ease-out forwards;
+  letter-spacing: 3px;
+}
+
+@keyframes matrixFade {
+  from { opacity: 1; }
+  to { opacity: 0.4; }
+}
+
+/* Input row */
+.terminalInput {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 13px;
+  border-top: 1px solid #2d2d2d;
+  padding-top: 6px;
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
   white-space: nowrap;
-  font-weight: 500;
+  gap: 0;
+  margin-right: 6px;
+}
+
+.promptUser {
+  color: #89d185;
+  font-weight: 600;
+}
+
+.promptAt {
+  color: #cccccc;
+}
+
+.promptHost {
+  color: #4ec9b0;
+  font-weight: 600;
+}
+
+.promptColon {
+  color: #cccccc;
+}
+
+.promptDir {
+  color: #569cd6;
+}
+
+.promptDollar {
+  color: #cccccc;
+  margin-left: 4px;
 }
 
 .input {
@@ -158,23 +267,20 @@
   background: #264f78;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   .terminal {
     height: 250px;
   }
-  
   .terminalContent {
-    padding: 8px;
+    padding: 6px 10px;
   }
-  
-  .terminalOutput,
-  .terminalInput,
-  .prompt,
-  .input {
+  .ascii {
+    font-size: 8px;
+  }
+  .line, .input, .prompt {
     font-size: 12px;
   }
-  
   .terminalTab {
     font-size: 11px;
     padding: 3px 8px;
@@ -183,33 +289,9 @@
 
 @media (max-width: 480px) {
   .terminal {
-    height: 200px;
+    height: 220px;
   }
-  
-  .prompt {
+  .ascii {
     display: none;
   }
-  
-  .terminalInput::before {
-    content: "$ ";
-    color: #4ec9b0;
-    font-weight: 500;
-  }
-}
-
-/* Terminal colors for different output types */
-.terminalOutput .error {
-  color: #f14c4c;
-}
-
-.terminalOutput .success {
-  color: #89d185;
-}
-
-.terminalOutput .warning {
-  color: #ffcc02;
-}
-
-.terminalOutput .info {
-  color: #569cd6;
 }

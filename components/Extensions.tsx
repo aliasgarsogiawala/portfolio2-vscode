@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Download, Star, Check, Plus } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { VscExtensions, VscSearch, VscClose, VscCheck, VscAdd, VscCloudDownload } from 'react-icons/vsc';
 import { usePluginStore } from '@/src/plugins/store';
 import { ALL_PLUGINS } from '@/src/plugins/registry';
 import { Plugin } from '@/src/plugins/types';
@@ -11,11 +11,11 @@ import styles from '@/styles/Extensions.module.css';
 
 interface ExtensionsProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
-  const [activeTab, setActiveTab] = useState<'installed' | 'marketplace'>('marketplace');
+  const [activeTab, setActiveTab] = useState<'installed' | 'marketplace'>('installed');
   const [searchQuery, setSearchQuery] = useState('');
   const { installedPlugins, install, uninstall, isInstalled } = usePluginStore();
 
@@ -37,23 +37,28 @@ export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '-100%' }}
-          transition={{ type: 'tween', duration: 0.3 }}
-          className={styles.extensionsPanel}
-        >
-          {/* Header */}
-          <div className={styles.header}>
-            <h2 className={styles.title}>Extensions</h2>
-            <button onClick={onClose} className={styles.closeButton}>
-              ×
-            </button>
-          </div>
+    <motion.div
+      initial={{ width: 0, opacity: 0 }}
+      animate={{ width: 350, opacity: 1 }}
+      exit={{ width: 0, opacity: 0 }}
+      transition={{ type: 'tween', duration: 0.3 }}
+      className={styles.extensionsPanel}
+    >
+      {/* Header */}
+      <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          <VscExtensions size={16} className={styles.headerIcon} />
+          <h2 className={styles.title}>Extensions</h2>
+        </div>
+        {onClose && (
+          <button onClick={onClose} className={styles.closeButton}>
+            <VscClose size={16} />
+          </button>
+        )}
+      </div>
 
           {/* Tabs */}
           <div className={styles.tabs}>
@@ -61,21 +66,21 @@ export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
               className={`${styles.tab} ${activeTab === 'marketplace' ? styles.active : ''}`}
               onClick={() => setActiveTab('marketplace')}
             >
-              <Plus size={16} />
+              <VscAdd size={16} />
               Marketplace
             </button>
             <button
               className={`${styles.tab} ${activeTab === 'installed' ? styles.active : ''}`}
               onClick={() => setActiveTab('installed')}
             >
-              <Check size={16} />
+              <VscCheck size={16} />
               Installed ({installedPlugins.length})
             </button>
           </div>
 
           {/* Search */}
           <div className={styles.searchContainer}>
-            <Search size={16} className={styles.searchIcon} />
+            <VscSearch size={16} className={styles.searchIcon} />
             <input
               type="text"
               placeholder="Search extensions..."
@@ -118,11 +123,11 @@ export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
                     
                     <div className={styles.extensionMeta}>
                       <div className={styles.rating}>
-                        <Star size={12} className={styles.starFilled} />
+                        <span>⭐</span>
                         <span>{plugin.rating}</span>
                       </div>
                       <div className={styles.downloads}>
-                        <Download size={12} />
+                        <VscCloudDownload size={12} />
                         <span>{plugin.downloads.toLocaleString()}</span>
                       </div>
                     </div>
@@ -144,9 +149,9 @@ export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
               <div className={styles.installed}>
                 {installedPluginObjects.length === 0 ? (
                   <div className={styles.emptyState}>
-                    <Plus size={48} className={styles.emptyIcon} />
-                    <h3>No Extensions Installed</h3>
-                    <p>Browse the marketplace to install extensions</p>
+                    <VscAdd size={48} className={styles.emptyIcon} />
+                    <h3 className={styles.emptyTitle}>No Extensions Installed</h3>
+                    <p className={styles.emptyDescription}>Browse the marketplace to install extensions</p>
                     <button
                       onClick={() => setActiveTab('marketplace')}
                       className={styles.browseButton}
@@ -155,50 +160,47 @@ export default function Extensions({ isOpen, onClose }: ExtensionsProps) {
                     </button>
                   </div>
                 ) : (
-                  installedPluginObjects.map((plugin, index) => (
-                    <motion.div
-                      key={plugin.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className={`${styles.extensionCard} ${styles.installedCard}`}
-                    >
-                      <div className={styles.extensionHeader}>
-                        <div className={styles.extensionIcon}>
-                          <div className={styles.iconPlaceholder}>
-                            {plugin.icon === 'Heart' && '❤️'}
-                            {plugin.icon === 'FileText' && '📄'}
-                            {plugin.icon === 'Award' && '🏆'}
-                            {plugin.icon === 'Mic' && '🎤'}
-                            {plugin.icon === 'Trophy' && '🏆'}
-                            {plugin.icon === 'GitBranch' && '🌿'}
+                  <div className={styles.extensionsList}>
+                    {installedPluginObjects.map((plugin, index) => (
+                      <motion.div
+                        key={plugin.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={styles.installedExtension}
+                      >
+                        <div className={styles.extensionHeader}>
+                          <div className={styles.extensionIcon}>
+                            <div className={styles.iconPlaceholder}>
+                              {plugin.icon === 'Heart' && '❤️'}
+                              {plugin.icon === 'FileText' && '📄'}
+                              {plugin.icon === 'Award' && '🏆'}
+                              {plugin.icon === 'Mic' && '🎤'}
+                              {plugin.icon === 'Trophy' && '🏆'}
+                              {plugin.icon === 'GitBranch' && '🌿'}
+                            </div>
+                          </div>
+                          <div className={styles.extensionInfo}>
+                            <h3 className={styles.extensionName}>{plugin.name}</h3>
+                            <p className={styles.extensionAuthor}>{plugin.author}</p>
                           </div>
                         </div>
-                        <div className={styles.extensionInfo}>
-                          <h3 className={styles.extensionName}>{plugin.name}</h3>
-                          <p className={styles.extensionAuthor}>{plugin.author}</p>
-                          <span className={styles.installedBadge}>Installed</span>
-                        </div>
-                      </div>
-                      
-                      <p className={styles.extensionDescription}>{plugin.description}</p>
-                      
-                      <div className={styles.installedActions}>
+                        
+                        <p className={styles.extensionDescription}>{plugin.description}</p>
+                        
                         <button
                           onClick={() => handlePluginAction(plugin)}
-                          className={styles.uninstallButton}
+                          className={`${styles.actionButton} ${styles.uninstall}`}
                         >
                           Uninstall
                         </button>
-                      </div>
-                    </motion.div>
-                  ))
+                      </motion.div>
+                    ))}
+                  </div>
                 )}
               </div>
             )}
           </div>
         </motion.div>
-      )}
-    </AnimatePresence>
   );
 }

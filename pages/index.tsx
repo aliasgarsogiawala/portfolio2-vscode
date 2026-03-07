@@ -4,27 +4,33 @@ import Image from 'next/image';
 import { VscArrowRight } from 'react-icons/vsc';
 
 import styles from '@/styles/HomePage.module.css';
+import profile from '@/data/profile';
+
+const ROLES = [
+  'Full Stack Developer',
+  'React Engineer',
+  'TypeScript Enthusiast',
+  'Problem Solver',
+  'Open Source Contributor',
+];
 
 export default function HomePage() {
   const [activeLineIndex, setActiveLineIndex] = useState(0);
+  const [displayedRole, setDisplayedRole] = useState('');
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const codeLines = [
     { code: 'const HomePage = () => {', type: 'function' },
-    {
-      code: '  const [isLoaded, setIsLoaded] = useState(true);',
-      type: 'variable',
-    },
+    { code: '  const [isLoaded, setIsLoaded] = useState(true);', type: 'variable' },
     { code: '  const developerInfo = {', type: 'variable' },
-    { code: "    name: 'Aliasgar Sogiawala',", type: 'array-item' },
-    { code: "    role: 'Full Stack Developer',", type: 'array-item' },
-    { code: "    bio: 'Building modern web experiences and AI / ML solutions'", type: 'array-item' },
+    { code: `    name: '${profile.name}',`, type: 'array-item' },
+    { code: `    role: '${profile.role}',`, type: 'array-item' },
+    { code: `    bio: '${profile.bio}'`, type: 'array-item' },
     { code: '  };', type: 'array-end' },
     { code: '', type: 'blank' },
     { code: '  useEffect(() => {', type: 'nested-function' },
-    {
-      code: '    document.title = `${developerInfo.name} | Portfolio`;',
-      type: 'return',
-    },
+    { code: '    document.title = `${developerInfo.name} | Portfolio`;', type: 'return' },
     { code: '    setIsLoaded(true);', type: 'function-call' },
     { code: '  }, []);', type: 'close' },
     { code: '', type: 'blank' },
@@ -33,10 +39,7 @@ export default function HomePage() {
     { code: '      <h1>{developerInfo.name}</h1>', type: 'object-method' },
     { code: '      <p>{developerInfo.role}</p>', type: 'object-method' },
     { code: '      <div className="cta">', type: 'object-method' },
-    {
-      code: '        <Link href="/projects">View Projects</Link>',
-      type: 'object-method',
-    },
+    { code: '        <Link href="/projects">View Projects</Link>', type: 'object-method' },
     { code: '      </div>', type: 'object-method' },
     { code: '    </main>', type: 'object-method' },
     { code: '  );', type: 'close' },
@@ -45,13 +48,36 @@ export default function HomePage() {
     { code: 'export default HomePage;', type: 'function-call' },
   ];
 
+  // Code line cycling
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveLineIndex((prev) => (prev + 1) % codeLines.length);
     }, 2000);
-
     return () => clearInterval(interval);
   }, [codeLines.length]);
+
+  // Typewriter for role
+  useEffect(() => {
+    const currentRole = ROLES[roleIndex];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayedRole === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayedRole === '') {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    } else {
+      timeout = setTimeout(() => {
+        setDisplayedRole(prev =>
+          isDeleting
+            ? prev.slice(0, prev.length - 1)
+            : currentRole.slice(0, prev.length + 1)
+        );
+      }, isDeleting ? 40 : 80);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedRole, isDeleting, roleIndex]);
 
   return (
     <div className={styles.heroLayout}>
@@ -92,23 +118,25 @@ export default function HomePage() {
 
         <div className={styles.infoSection}>
           <h1 className={styles.developerName}>
-            Aliasgar <span className={styles.accentText}>Sogiawala</span>
+            {profile.firstName} <span className={styles.accentText}>{profile.lastName}</span>
           </h1>
 
-          <div className={styles.developerRole}>Full Stack Web Developer</div>
+          <div className={styles.developerRole}>
+            <span>{displayedRole}</span>
+            <span className={styles.cursor}>|</span>
+          </div>
 
-          <p className={styles.bio}>
-            Building modern web experiences and AI / ML solutions
-          </p>
+          <p className={styles.bio}>{profile.bio}</p>
 
           <div className={styles.actionLinks}>
             <Link href="/projects" className={styles.primaryLink}>
               View Projects <VscArrowRight />
             </Link>
+            <Link href="/contact" className={styles.secondaryLink}>
+              Contact Me
+            </Link>
           </div>
         </div>
-
-        
       </div>
 
       <div className={styles.decorElements}>
@@ -126,45 +154,20 @@ export default function HomePage() {
         <div className={styles.codeSymbol3}>{'=>'}</div>
         <div className={styles.dotPattern}></div>
         <div className={styles.mobileAccent}></div>
-        
-        <div className={styles.techIcon1}>
-          <Image src="/logos/react_icon.svg" alt="React" width={32} height={32} />
-        </div>
-        <div className={styles.techIcon2}>
-          <Image src="/logos/nextjs_icon.svg" alt="Next.js" width={28} height={28} />
-        </div>
-        <div className={styles.techIcon3}>
-          <Image src="/logos/typescript_icon.svg" alt="TypeScript" width={30} height={30} />
-        </div>
-        <div className={styles.techIcon4}>
-          <Image src="/logos/python_icon.svg" alt="Python" width={32} height={32} />
-        </div>
-        <div className={styles.techIcon5}>
-          <Image src="/logos/nodejs_icon.svg" alt="Node.js" width={32} height={32} />
-        </div>
-        <div className={styles.techIcon6}>
-          <Image src="/logos/java_icon.svg" alt="Java" width={28} height={28} />
-        </div>
-        <div className={styles.techIcon7}>
-          <Image src="/logos/vercel.svg" alt="Vercel" width={30} height={30} />
-        </div>
-        <div className={styles.techIcon8}>
-          <Image src="/logos/git_icon.svg" alt="Git" width={28} height={28} />
-        </div>
-        <div className={styles.techIcon9}>
-          <Image src="/logos/github_icon.svg" alt="GitHub" width={30} height={30} />
-        </div>
-        <div className={styles.techIcon10}>
-          <Image src="/logos/js_icon.svg" alt="JavaScript" width={28} height={28} />
-        </div>
-        <div className={styles.techIcon11}>
-          <Image src="/logos/html_icon.svg" alt="HTML" width={26} height={26} />
-        </div>
-        <div className={styles.techIcon12}>
-          <Image src="/logos/css_icon.svg" alt="CSS" width={26} height={26} />
-        </div>
+
+        <div className={styles.techIcon1}><Image src="/logos/react_icon.svg" alt="React" width={32} height={32} /></div>
+        <div className={styles.techIcon2}><Image src="/logos/nextjs_icon.svg" alt="Next.js" width={28} height={28} /></div>
+        <div className={styles.techIcon3}><Image src="/logos/typescript_icon.svg" alt="TypeScript" width={30} height={30} /></div>
+        <div className={styles.techIcon4}><Image src="/logos/python_icon.svg" alt="Python" width={32} height={32} /></div>
+        <div className={styles.techIcon5}><Image src="/logos/nodejs_icon.svg" alt="Node.js" width={32} height={32} /></div>
+        <div className={styles.techIcon6}><Image src="/logos/java_icon.svg" alt="Java" width={28} height={28} /></div>
+        <div className={styles.techIcon7}><Image src="/logos/vercel.svg" alt="Vercel" width={30} height={30} /></div>
+        <div className={styles.techIcon8}><Image src="/logos/git_icon.svg" alt="Git" width={28} height={28} /></div>
+        <div className={styles.techIcon9}><Image src="/logos/github_icon.svg" alt="GitHub" width={30} height={30} /></div>
+        <div className={styles.techIcon10}><Image src="/logos/js_icon.svg" alt="JavaScript" width={28} height={28} /></div>
+        <div className={styles.techIcon11}><Image src="/logos/html_icon.svg" alt="HTML" width={26} height={26} /></div>
+        <div className={styles.techIcon12}><Image src="/logos/css_icon.svg" alt="CSS" width={26} height={26} /></div>
       </div>
     </div>
   );
 }
-

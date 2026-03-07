@@ -1,21 +1,75 @@
 .tab {
-  padding: 0.5rem 1.25rem;
+  padding: 0 0.75rem;
   background: var(--tab-bg);
-  color: #ececec;
+  color: #8e9aab;
   display: flex;
   align-items: center;
-  border: 1px solid var(--tab-border);
+  border-right: 1px solid var(--tab-border);
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
+  height: 35px;
+  min-width: 0;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.1s;
+  gap: 4px;
 }
 
-.tab p {
-  margin-left: 5px;
+.tab:hover {
+  background: color-mix(in srgb, var(--tab-bg) 80%, white);
+  color: #ccc;
+}
+
+.tabLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tabLink p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
 .active {
   border-top: 1px solid var(--accent-color);
   background: var(--tab-active-bg);
+  color: #ececec;
   border-bottom: none;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #8e9aab;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  opacity: 0;
+  visibility: hidden;
+  flex-shrink: 0;
+  transition: opacity 0.1s, background 0.1s;
+  width: 18px;
+  height: 18px;
+}
+
+.closeBtnVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }

@@ -1,35 +1,41 @@
 import Head from 'next/head';
+import profile from '@/data/profile';
 
 interface CustomHeadProps {
-  title: string;
+  title?: string;
 }
 
 const CustomHead = ({ title }: CustomHeadProps) => {
+  const pageTitle = title ?? profile.name;
+  const description = `${profile.name} — ${profile.role}. ${profile.bio}.`;
+  const keywords = [
+    profile.name.toLowerCase(),
+    profile.firstName.toLowerCase(),
+    profile.lastName.toLowerCase(),
+    'web developer portfolio',
+    `${profile.firstName.toLowerCase()} web developer`,
+    `${profile.firstName.toLowerCase()} developer`,
+    'full stack developer',
+    'next.js developer',
+    'typescript developer',
+    'vscode-portfolio',
+  ].join(', ');
+
   return (
     <Head>
-      <title>{title}</title>
-      <meta
-        name="description"
-        content="Nitin Ranganath is an avid full stack web developer building websites and applications you'd love to use"
-      />
-      <meta
-        name="keywords"
-        content="nitin ranganath, nitin, ranganath, web developer portfolio, nitin web developer, nitin developer, mern stack, nitin ranganath portfolio, vscode-portfolio"
-      />
-      <meta property="og:title" content="Aliasgar Sogiawala's Portfolio" />
-      <meta
-        property="og:description"
-        content="A full-stack developer building websites that you'd like to use."
-      />
-      <meta property="og:image" content="/metaimage.png" />
-      <meta property="og:url" content="https://aliasgar-vscode.vercel.app" />
+      <title>{pageTitle}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta property="og:title" content={`${profile.name}'s Portfolio`} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={profile.ogImage} />
+      <meta property="og:url" content={profile.siteUrl} />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={`${profile.name}'s Portfolio`} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={profile.ogImage} />
     </Head>
   );
 };
 
 export default CustomHead;
-
-CustomHead.defaultProps = {
-  title: 'Aliasgar Sogiawala',
-};

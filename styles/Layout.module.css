@@ -11,7 +11,7 @@
   color: var(--text-color);
   font-family: 'JetBrains Mono', monospace;
   flex: 1;
-  height: 85vh;
+  height: calc(100vh - 30px - 35px - 25px);
   overflow-y: auto;
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -25,7 +25,7 @@
 }
 
 .content::-webkit-scrollbar {
-  width: 15px;
+  width: 12px;
 }
 
 .content::-webkit-scrollbar-track {
@@ -38,8 +38,181 @@
   border-left: 1px solid #1e1f29;
 }
 
+/* ─── Command Palette ─── */
+.paletteOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.palette {
+  background: #252526;
+  border: 1px solid #454545;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 560px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: paletteIn 0.12s ease;
+}
+
+@keyframes paletteIn {
+  from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.paletteInputWrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #454545;
+  gap: 8px;
+}
+
+.paletteIcon {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+.paletteInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ccc;
+  font-size: 0.95rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  caret-color: var(--accent-color);
+}
+
+.paletteList {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.paletteList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.paletteList::-webkit-scrollbar-thumb {
+  background: #454545;
+  border-radius: 3px;
+}
+
+.paletteItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #ccc;
+  font-family: 'Source Sans Pro', sans-serif;
+  transition: background 0.1s;
+}
+
+.paletteItem:hover {
+  background: #2a2d2e;
+}
+
+.paletteItemSelected {
+  background: #094771 !important;
+  color: #fff;
+}
+
+.paletteEmpty {
+  padding: 16px;
+  text-align: center;
+  color: #6e7681;
+  font-size: 0.85rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.paletteHint {
+  display: flex;
+  gap: 1rem;
+  padding: 6px 14px;
+  background: #1e1e1e;
+  font-size: 0.72rem;
+  color: #6e7681;
+  border-top: 1px solid #454545;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* ─── Konami Easter Egg ─── */
+.konamiOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.konamiCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.konamiMessage {
+  position: relative;
+  z-index: 10000;
+  text-align: center;
+  color: #00ff41;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #00ff41;
+  border-radius: 8px;
+  padding: 2rem 3rem;
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
+  animation: konamiPulse 2s infinite ease-in-out;
+}
+
+@keyframes konamiPulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(0, 255, 65, 0.3); }
+  50% { box-shadow: 0 0 60px rgba(0, 255, 65, 0.6); }
+}
+
+.konamiAscii {
+  font-size: 0.6rem;
+  color: #00ff41;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.konamiSubtitle {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+.konamiHint {
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+  letter-spacing: 4px;
+  color: #00ff41;
+}
+
+.konamiClose {
+  font-size: 0.75rem;
+  color: #6e7681;
+  margin-top: 1rem;
+}
+
 @media screen and (max-width: 600px) {
   .content {
     padding: 2rem 1rem;
   }
 }
+

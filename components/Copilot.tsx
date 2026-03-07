@@ -1,5 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { VscCopilot, VscSend, VscClose, VscChevronDown } from 'react-icons/vsc';
+import {
+  VscCopilot,
+  VscSend,
+  VscClose,
+  VscAdd,
+  VscTrash,
+  VscAccount,
+} from 'react-icons/vsc';
 import styles from '@/styles/Copilot.module.css';
 
 interface Message {
@@ -9,19 +16,32 @@ interface Message {
   timestamp: Date;
 }
 
-const Copilot = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hi! I'm your AI assistant trained on Aliasgar's information. Ask me anything about his skills, experience, projects, or background!",
-      isUser: false,
-      timestamp: new Date(),
-    },
-  ]);
+interface CopilotProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const WELCOME_MESSAGE: Message = {
+  id: '1',
+  text: "Hi! I'm Aliasgar's AI assistant. Ask me anything about his skills, experience, projects, or background!",
+  isUser: false,
+  timestamp: new Date(),
+};
+
+const SUGGESTIONS = [
+  "What are Aliasgar's skills?",
+  "Tell me about his projects",
+  "Where does he work?",
+  "How can I contact him?",
+  "What is he interested in?",
+];
+
+const Copilot = ({ isOpen, onClose }: CopilotProps) => {
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -31,12 +51,20 @@ const Copilot = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Focus input when panel opens
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => inputRef.current?.focus(), 150);
+    }
+  }, [isOpen]);
+
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
+    const text = inputValue.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue,
+      text,
       isUser: true,
       timestamp: new Date(),
     };
@@ -48,10 +76,8 @@ const Copilot = () => {
     try {
       const response = await fetch('/api/copilot', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: inputValue }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text }),
       });
 
       const data = await response.json();
@@ -65,140 +91,150 @@ const Copilot = () => {
 
       setMessages(prev => [...prev, aiMessage]);
     } catch {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: "Sorry, I'm having trouble connecting right now. Please try again later.",
-        isUser: false,
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          text: "Sorry, I'm having trouble connecting right now. Please try again.",
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
 
-  const suggestionQuestions = [
-    "What are Aliasgar's main skills?",
-    "Tell me about his projects",
-    "What's his educational background?",
-    "What technologies does he work with?",
-    "How can I contact him?",
-  ];
+  const handleNewChat = () => {
+    setMessages([WELCOME_MESSAGE]);
+    setInputValue('');
+  };
 
-  const handleSuggestionClick = (question: string) => {
-    setInputValue(question);
+  const handleSuggestion = (q: string) => {
+    setInputValue(q);
+    inputRef.current?.focus();
   };
 
   return (
-    <>
-      <div className={`${styles.copilotContainer} ${isOpen ? styles.open : ''}`}>
-        <div className={styles.copilotHeader}>
-          <div className={styles.headerLeft}>
-            <VscCopilot className={styles.copilotIcon} />
-            <span>AI Assistant</span>
-          </div>
-          <div className={styles.headerButtons}>
-            <button
-              className={styles.headerButton}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <VscChevronDown className={isOpen ? styles.rotated : ''} />
-            </button>
-            <button
-              className={styles.headerButton}
-              onClick={() => setIsOpen(false)}
-            >
-              <VscClose />
-            </button>
-          </div>
+    <div className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}>
+      {/* Panel header — matches VS Code secondary sidebar header */}
+      <div className={styles.panelHeader}>
+        <div className={styles.panelHeaderLeft}>
+          <VscCopilot className={styles.headerIcon} />
+          <span className={styles.headerTitle}>Copilot Chat</span>
         </div>
+        <div className={styles.panelHeaderActions}>
+          <button
+            className={styles.iconBtn}
+            title="New Chat"
+            onClick={handleNewChat}
+          >
+            <VscAdd size={14} />
+          </button>
+          <button
+            className={styles.iconBtn}
+            title="Clear Chat"
+            onClick={() => setMessages([WELCOME_MESSAGE])}
+          >
+            <VscTrash size={14} />
+          </button>
+          <button
+            className={styles.iconBtn}
+            title="Close"
+            onClick={onClose}
+          >
+            <VscClose size={14} />
+          </button>
+        </div>
+      </div>
 
-        {isOpen && (
-          <div className={styles.copilotContent}>
-            <div className={styles.messagesContainer}>
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`${styles.message} ${
-                    message.isUser ? styles.userMessage : styles.aiMessage
-                  }`}
-                >
-                  <div className={styles.messageContent}>
-                    <div className={styles.messageText}>{message.text}</div>
-                    <div className={styles.messageTime}>
-                      {message.timestamp.toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {isLoading && (
-                <div className={`${styles.message} ${styles.aiMessage}`}>
-                  <div className={styles.messageContent}>
-                    <div className={styles.typing}>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {messages.length === 1 && (
-              <div className={styles.suggestions}>
-                <p className={styles.suggestionsTitle}>Try asking:</p>
-                {suggestionQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    className={styles.suggestionButton}
-                    onClick={() => handleSuggestionClick(question)}
-                  >
-                    {question}
-                  </button>
-                ))}
+      {/* Messages */}
+      <div className={styles.messages}>
+        {messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={`${styles.messageRow} ${msg.isUser ? styles.userRow : styles.aiRow}`}
+          >
+            {!msg.isUser && (
+              <div className={styles.avatar}>
+                <VscCopilot size={14} />
               </div>
             )}
+            <div className={`${styles.bubble} ${msg.isUser ? styles.userBubble : styles.aiBubble}`}>
+              <p className={styles.bubbleText}>{msg.text}</p>
+            </div>
+            {msg.isUser && (
+              <div className={`${styles.avatar} ${styles.userAvatar}`}>
+                <VscAccount size={14} />
+              </div>
+            )}
+          </div>
+        ))}
 
-            <div className={styles.inputContainer}>
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Ask me anything about Aliasgar..."
-                className={styles.messageInput}
-                rows={1}
-              />
-              <button
-                onClick={handleSendMessage}
-                disabled={!inputValue.trim() || isLoading}
-                className={styles.sendButton}
-              >
-                <VscSend />
-              </button>
+        {isLoading && (
+          <div className={`${styles.messageRow} ${styles.aiRow}`}>
+            <div className={styles.avatar}>
+              <VscCopilot size={14} />
+            </div>
+            <div className={`${styles.bubble} ${styles.aiBubble}`}>
+              <div className={styles.typingDots}>
+                <span /><span /><span />
+              </div>
             </div>
           </div>
         )}
+
+        <div ref={messagesEndRef} />
       </div>
 
-      <button
-        className={`${styles.copilotToggle} ${isOpen ? styles.hidden : ''}`}
-        onClick={() => setIsOpen(true)}
-      >
-        <VscCopilot />
-        <span>AI Assistant</span>
-      </button>
-    </>
+      {/* Suggestions — shown only when just the welcome message is present */}
+      {messages.length === 1 && (
+        <div className={styles.suggestions}>
+          {SUGGESTIONS.map((q) => (
+            <button
+              key={q}
+              className={styles.suggestionChip}
+              onClick={() => handleSuggestion(q)}
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Input area */}
+      <div className={styles.inputArea}>
+        <div className={styles.inputWrapper}>
+          <textarea
+            ref={inputRef}
+            className={styles.input}
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Ask Copilot..."
+            rows={1}
+          />
+          <button
+            className={styles.sendBtn}
+            onClick={handleSendMessage}
+            disabled={!inputValue.trim() || isLoading}
+            title="Send (Enter)"
+          >
+            <VscSend size={14} />
+          </button>
+        </div>
+        <p className={styles.inputHint}>
+          Copilot can make mistakes. <kbd>Enter</kbd> to send, <kbd>Shift+Enter</kbd> for newline.
+        </p>
+      </div>
+    </div>
   );
 };
 

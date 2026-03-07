@@ -5,10 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #ccc;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   border-bottom: 1px solid #191d20;
+  position: relative;
+  z-index: 1000;
+  user-select: none;
 }
 
 .items {
@@ -16,47 +19,166 @@
   display: flex;
   margin-right: auto;
   margin-left: 0.5rem;
+  position: relative;
 }
 
 .title {
   flex: 1;
   text-align: center;
+  font-size: 0.8rem;
+  color: #8e9aab;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.items > * {
+.menuWrapper {
+  position: relative;
+}
+
+.menuLabel {
   padding: 0 0.5rem;
   cursor: pointer;
-}
-
-.clickable {
-  padding: 0 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.clickable:hover {
-  background: var(--titlebar-hover-bg);
   border-radius: 3px;
+  line-height: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.1s ease;
+  color: #ccc;
 }
 
+.menuLabel:hover,
+.menuLabelActive {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: #252526;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  min-width: 220px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  padding: 4px 0;
+  animation: dropdownIn 0.1s ease;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #ccc;
+  gap: 1rem;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.dropdownItem:hover {
+  background: #094771;
+  color: #fff;
+}
+
+.dropdownItemDisabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.dropdownItemDisabled:hover {
+  background: transparent;
+  color: #ccc;
+}
+
+.dropdownLabel {
+  flex: 1;
+}
+
+.shortcut {
+  font-size: 0.72rem;
+  color: #8e9aab;
+  flex-shrink: 0;
+}
+
+.divider {
+  height: 1px;
+  background: #454545;
+  margin: 4px 0;
+}
+
+/* Window Buttons */
+.titlebarActions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 8px;
+}
+
+.copilotButton {
+  background: none;
+  border: none;
+  color: #8e9aab;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  height: 22px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.copilotButton:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.copilotButton.active {
+  color: #7dc4ff;
+}
+
+/* Window Buttons */
 .windowButtons {
   flex: 1;
   display: flex;
   align-items: center;
-  margin-left: auto;
+  justify-content: flex-end;
 }
 
 .windowButtons * {
   margin-left: 0.5rem;
-  height: 13px;
-  width: 13px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
   cursor: pointer;
+  transition: filter 0.15s ease;
+  display: inline-block;
+}
+
+.windowButtons *:hover {
+  filter: brightness(1.3);
 }
 
 .minimize {
   background: #f1fa8c;
-  margin-left: auto;
 }
 
 .maximize {
@@ -68,7 +190,17 @@
 }
 
 @media screen and (max-width: 900px) {
-  .items p {
+  .menuLabel {
+    font-size: 0.75rem;
+    padding: 0 0.3rem;
+  }
+  .title {
+    flex: 4;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .items {
     display: none;
   }
   .title {
@@ -91,8 +223,8 @@
 }
 
 .gameModal {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background: #1e1e1e;
+  border: 1px solid #454545;
   border-radius: 8px;
   width: 90%;
   max-width: 800px;
@@ -106,15 +238,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #454545;
+  background: #252526;
+  border-radius: 8px 8px 0 0;
 }
 
 .gameHeader h3 {
   margin: 0;
-  color: var(--text-primary);
-  font-size: 1.2rem;
+  color: #ccc;
+  font-size: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .closeGameButton {
@@ -122,9 +256,9 @@
   color: #ff4444;
   border: 1px solid rgba(255, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.3rem 0.6rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
@@ -145,13 +279,15 @@
 }
 
 .gameInstructions {
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   text-align: center;
-  background: var(--bg-primary);
+  background: #252526;
+  border-radius: 0 0 8px 8px;
 }
 
 .gameInstructions p {
-  margin: 0.5rem 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  margin: 0.25rem 0;
+  color: #8e9aab;
+  font-size: 0.85rem;
+  font-family: 'Source Sans Pro', sans-serif;
 }

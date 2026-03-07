@@ -1,29 +1,41 @@
 .explorer {
   background: var(--explorer-bg);
-  width: 18vw;
+  width: 200px;
+  min-width: 160px;
   color: rgb(225, 228, 232);
   font-family: 'Source Sans Pro', sans-serif;
   border-right: 1px solid var(--explorer-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 30px - 25px);
+  flex-shrink: 0;
 }
 
 .title {
   padding: 0.5rem 0.75rem;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
+  font-size: 0.75rem;
+  letter-spacing: 1.2px;
   margin-bottom: 0.75rem;
+  color: #ccc;
 }
 
 .heading {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0 0.5rem;
+  padding: 2px 0.5rem;
+  color: #ccc;
+  user-select: none;
+}
+
+.heading:hover {
+  background: var(--explorer-hover-bg);
 }
 
 .checkbox {
@@ -33,21 +45,22 @@
 }
 
 .files {
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   cursor: pointer;
 }
 
 .file {
-  padding: 0.2rem 1rem;
+  padding: 0.18rem 0.5rem 0.18rem 1.5rem;
   display: flex;
   align-items: center;
-  font-size: 0.875rem;
-  color: white;
+  font-size: 0.82rem;
+  color: #ccc;
   text-decoration: none;
+  transition: background 0.1s;
 }
 
 .file p {
-  margin-left: 5px;
+  margin-left: 6px;
 }
 
 .file:hover {
@@ -56,32 +69,75 @@
 
 .chevron {
   transition: transform 0.2s;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+/* Context Menu */
+.contextMenu {
+  position: fixed;
+  background: #252526;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  min-width: 180px;
+  z-index: 99999;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  padding: 4px 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.82rem;
+}
+
+.contextMenuHeader {
+  padding: 4px 12px;
+  color: #8e9aab;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #454545;
+  margin-bottom: 4px;
+}
+
+.contextMenuItem {
+  padding: 5px 14px;
+  cursor: pointer;
+  color: #ccc;
+  transition: background 0.1s;
+}
+
+.contextMenuItem:hover {
+  background: #094771;
+  color: #fff;
+}
+
+.contextMenuDivider {
+  height: 1px;
+  background: #454545;
+  margin: 4px 0;
+}
+
+.contextMenuEgg {
+  color: #f9826c;
+  font-weight: 500;
+}
+
+/* Section Spacing */
+.explorer > div {
+  margin-bottom: 1rem;
+}
+
+/* Plugins Section Styling */
+.pluginsSection {
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 2000px) {
   .explorer {
-    width: 10vw;
+    width: 160px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .explorer {
-    width: 20vw;
+    width: 160px;
   }
-}
-
-/* Section Spacing */
-.explorer > div {
-  margin-bottom: 1.5rem;
-}
-
-.explorer > div:last-child {
-  margin-bottom: 0;
-}
-
-/* Plugins Section Styling */
-.pluginsSection {
-  margin-top: 1.5rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -89,3 +145,4 @@
     display: none;
   }
 }
+

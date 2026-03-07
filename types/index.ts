@@ -18,6 +18,8 @@ export interface Project {
   liveLink?: string;
   slug: string;
   techStack: string[];
+  /** Mark as true to surface the project in the "Featured" section on the home page. */
+  featured?: boolean;
 }
 
 export interface Repo {

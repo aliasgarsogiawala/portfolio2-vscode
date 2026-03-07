@@ -5,6 +5,7 @@ import Layout from '@/components/Layout';
 import Head from '@/components/Head';
 import { TerminalProvider } from '@/contexts/TerminalContext';
 import { PluginProvider } from '@/src/plugins/store';
+import profile from '@/data/profile';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
@@ -21,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <PluginProvider>
       <TerminalProvider>
         <Layout>
-          <Head title={`Aliasgar Sogiawala | ${pageProps.title}`} />
+          <Head title={`${profile.name} | ${pageProps.title}`} />
           <Component {...pageProps} />
         </Layout>
       </TerminalProvider>

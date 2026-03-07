@@ -1,13 +1,6 @@
-export interface Project {
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-  githubLink?: string;
-  liveLink?: string;
-  slug: string;
-  techStack: string[];
-}
+// Project type is defined once in types/index.ts — import from there.
+export type { Project } from '@/types';
+import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
@@ -17,6 +10,7 @@ export const projects: Project[] = [
     link: 'https://github.com/aliasgarsogiawala/toursafe',
     liveLink: 'https://toursafe.in',
     slug: 'toursafe',
+    featured: true,
     techStack: ['Next.js', 'TypeScript', 'Neon', 'Tailwind CSS', 'Clerk', 'Vercel']
   },
   {
@@ -26,6 +20,7 @@ export const projects: Project[] = [
     link: 'https://github.com/aliasgarsogiawala/zillionite',
     liveLink: 'https://zillionite.com',
     slug: 'zillionite',
+    featured: true,
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Razorpay', ]
   },
   {
@@ -36,6 +31,7 @@ export const projects: Project[] = [
     githubLink: 'https://github.com/aliasgarsogiawala/paradoc',
     liveLink: 'https://paradocc.vercel.app',
     slug: 'paradoc',
+    featured: true,
     techStack: ['Next.js', 'Javascript', 'Clerk', 'Gemini API', 'Tailwind CSS']
   },
   {

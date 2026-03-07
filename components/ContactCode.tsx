@@ -1,32 +1,5 @@
 import styles from '@/styles/ContactCode.module.css';
-
-const contactItems = [
-  {
-    social: 'email',
-    link: 'aliasgarsogiawala@gmail.com',
-    href: 'mailto:aliasgarsogiawala@gmail.com',
-  },
-  {
-    social: 'github',
-    link: 'aliasgarsogiawala',
-    href: 'https://github.com/aliasgarsogiawala',
-  },
-  {
-    social: 'linkedin',
-    link: 'aliasgar-sogiawala',
-    href: 'https://www.linkedin.com/in/aliasgar-sogiawala/',
-  },
-  {
-    social: 'twitter',
-    link: 'aliasgarsogiawala',
-    href: 'https://www.twitter.com/aliasgarsogiawala',
-  },
-  {
-    social: 'instagram',
-    link: 'aliasgarsogiawala',
-    href: 'https://www.instagram.com/aliasgarsogiawala',
-  },
-];
+import profile from '@/data/profile';
 
 const ContactCode = () => {
   return (
@@ -34,11 +7,11 @@ const ContactCode = () => {
       <p className={styles.line}>
         <span className={styles.className}>.socials</span> &#123;
       </p>
-      {contactItems.map((item, index) => (
+      {profile.socials.map((item, index) => (
         <p className={styles.line} key={index}>
           &nbsp;&nbsp;&nbsp;{item.social}:{' '}
-          <a href={item.href} target="_blank" rel="noopener">
-            {item.link}
+          <a href={item.href} target="_blank" rel="noopener noreferrer">
+            {item.label}
           </a>
           ;
         </p>
