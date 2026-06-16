@@ -36,10 +36,12 @@ export interface VolunteerEntry {
   id: string;
   organization: string;
   role: string;
+  category?: string;
   impact: string[];
   dateRange: string;
   link?: string;
   location?: string;
+  certificates?: { alt: string; src?: string }[];
 }
 
 export interface ResearchPaper {

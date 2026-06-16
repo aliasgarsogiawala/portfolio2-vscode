@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ExternalLink, Users, Copy, Check } from 'lucide-react';
 import { ResearchPaper } from '../../src/plugins/types';
+import styles from '@/styles/ResearchPapersPage.module.css';
 
-const samplePapers: ResearchPaper[] = [
+const papers: ResearchPaper[] = [
   {
     id: '4',
     title: 'Reinforcement Learning in Predictive Analytics for Human Behaviour',
@@ -20,148 +21,106 @@ const samplePapers: ResearchPaper[] = [
 ];
 
 export default function ResearchPapersPage() {
-  const [papers] = useState<ResearchPaper[]>(samplePapers);
-  const [selectedPaper] = useState<ResearchPaper | null>(papers[0]);
-  const [copiedBibtex, setCopiedBibtex] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const paper = papers[0];
 
-  const copyBibtex = (bibtex: string) => {
-    navigator.clipboard.writeText(bibtex);
-    setCopiedBibtex(true);
-    setTimeout(() => setCopiedBibtex(false), 2000);
+  const copyBibtex = () => {
+    if (!paper.bibtex) return;
+    navigator.clipboard.writeText(paper.bibtex);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const paper = selectedPaper;
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f] text-gray-100 p-6">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <FileText className="w-7 h-7" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">Research Papers</h1>
-              <p className="text-gray-400 mt-1">Published academic contributions</p>
-            </div>
+    <div className={styles.layout}>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={styles.header}
+      >
+        <div className={styles.fileChip}>
+          <FileText size={14} />
+          <span>research-papers.md</span>
+        </div>
+        <h1 className={styles.title}>Research Papers</h1>
+        <p className={styles.subtitle}>Published academic contributions</p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className={styles.card}
+      >
+        <div className={styles.cardHeader}>
+          <h2 className={styles.paperTitle}>{paper.title}</h2>
+          <div className={styles.venueRow}>
+            <span className={styles.venue}>{paper.venue}</span>
+            <span className={styles.dot}>•</span>
+            <span>{paper.year}</span>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Paper Card */}
-        {paper && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-[#2d2d3d] to-[#1f1f2e] border border-blue-500/30 rounded-2xl overflow-hidden shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-shadow duration-300"
-          >
-            {/* Header Section */}
-            <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 border-b border-blue-500/20 px-8 py-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-blue-300 mb-3 leading-tight">
-                {paper.title}
-              </h2>
-              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-sm text-gray-400">
-                <span className="font-medium text-white">{paper.venue}</span>
-                <span className="hidden md:inline">•</span>
-                <span>{paper.year}</span>
-              </div>
-            </div>
+        <div className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <Users size={14} /> Authors
+          </div>
+          <p className={styles.authors}>{paper.authors.join(', ')}</p>
+        </div>
 
-            {/* Content Section */}
-            <div className="px-8 py-8 space-y-6">
-              {/* Authors */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <Users className="w-5 h-5 text-blue-400" />
-                  <h3 className="font-semibold text-gray-200">Authors</h3>
-                </div>
-                <p className="text-gray-300 ml-7">{paper.authors.join(', ')}</p>
-              </div>
+        <div className={styles.section}>
+          <div className={styles.sectionHeading}>Abstract</div>
+          <p className={styles.abstract}>{paper.abstract}</p>
+        </div>
 
-              {/* Abstract */}
-              <div>
-                <h3 className="font-semibold text-gray-200 mb-3">Abstract</h3>
-                <p className="text-gray-300 leading-relaxed text-justify">
-                  {paper.abstract}
-                </p>
-              </div>
+        <div className={styles.section}>
+          <div className={styles.sectionHeading}>Topics</div>
+          <div className={styles.tags}>
+            {paper.tags.map((tag) => (
+              <span key={tag} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
 
-              {/* Tags */}
-              <div>
-                <h3 className="font-semibold text-gray-200 mb-3">Topics</h3>
-                <div className="flex flex-wrap gap-2">
-                  {paper.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-medium border border-blue-500/40 hover:bg-blue-500/30 transition-colors"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* BibTeX */}
-              {paper.bibtex && (
-                <div>
-                  <h3 className="font-semibold text-gray-200 mb-3">BibTeX</h3>
-                  <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg p-4 relative">
-                    <pre className="text-xs text-gray-300 overflow-x-auto font-mono whitespace-pre-wrap break-words">
-                      {paper.bibtex}
-                    </pre>
-                    <button
-                      onClick={() => copyBibtex(paper.bibtex!)}
-                      className="absolute top-3 right-3 p-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
-                      title="Copy BibTeX"
-                    >
-                      {copiedBibtex ? (
-                        <Check className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <Copy className="w-4 h-4 text-gray-300" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="bg-gradient-to-r from-blue-600/5 to-purple-600/5 border-t border-blue-500/20 px-8 py-6 flex flex-col sm:flex-row gap-3">
-              {paper.doiLink && (
-                <a
-                  href={paper.doiLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  View on Zenodo
-                </a>
-              )}
-              <button
-                onClick={() => copyBibtex(paper.bibtex!)}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors duration-200"
-              >
-                {copiedBibtex ? (
-                  <>
-                    <Check className="w-5 h-5 text-green-400" />
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-5 h-5" />
-                    Copy BibTeX
-                  </>
-                )}
+        {paper.bibtex && (
+          <div className={styles.section}>
+            <div className={styles.sectionHeading}>BibTeX</div>
+            <div className={styles.bibtexBlock}>
+              <pre>{paper.bibtex}</pre>
+              <button className={styles.copyBtn} onClick={copyBibtex} title="Copy BibTeX">
+                {copied ? <Check size={15} /> : <Copy size={15} />}
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
-      </div>
+
+        <div className={styles.actions}>
+          {paper.doiLink && (
+            <a
+              href={paper.doiLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.primaryBtn}
+            >
+              <ExternalLink size={16} />
+              View on Zenodo
+            </a>
+          )}
+          <button onClick={copyBibtex} className={styles.secondaryBtn}>
+            {copied ? (
+              <>
+                <Check size={16} /> Copied!
+              </>
+            ) : (
+              <>
+                <Copy size={16} /> Copy BibTeX
+              </>
+            )}
+          </button>
+        </div>
+      </motion.div>
     </div>
   );
 }

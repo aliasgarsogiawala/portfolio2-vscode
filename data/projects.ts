@@ -86,7 +86,7 @@ export const projects: Project[] = [
   {
     title: 'Eggstinction',
     description: 'A canvas-based tower-defense game where you defend the last dinosaur egg from a swarm of predators, with a gacha roulette that decides what your dinosaur becomes.',
-    image: 'https://opengraph.githubassets.com/1/aliasgarsogiawala/eggstinction',
+    image: '/project-images/eggstinction.png',
     link: 'https://github.com/aliasgarsogiawala/eggstinction',
     githubLink: 'https://github.com/aliasgarsogiawala/eggstinction',
     liveLink: 'https://savedategg.vercel.app',
