@@ -94,6 +94,15 @@ export const projects: Project[] = [
     techStack: ['JavaScript', 'Canvas', 'Convex']
   },
   {
+    title: 'FakeGeotag',
+    description: 'Add a fake GeoTag to your photos using Python ImageDraw and the Mapbox API.',
+    image: 'https://opengraph.githubassets.com/1/aliasgarsogiawala/FakeGeotag',
+    link: 'https://github.com/aliasgarsogiawala/FakeGeotag',
+    githubLink: 'https://github.com/aliasgarsogiawala/FakeGeotag',
+    slug: 'fakegeotag',
+    techStack: ['Python', 'Pillow', 'Mapbox API']
+  },
+  {
     title: 'Uber Analytics Dashboard',
     description: 'A Power BI dashboard analyzing Uber trip data — covering revenue trends, trip patterns, and rider/driver behavior — with a full PDF writeup of the findings.',
     image: 'https://raw.githubusercontent.com/aliasgarsogiawala/Dashboards/main/Uber/uberoutput1.png',

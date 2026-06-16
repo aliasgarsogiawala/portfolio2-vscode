@@ -15,8 +15,8 @@ const volunteerWork: VolunteerEntry[] = [
     dateRange: 'Feb 2025 - Apr 2025 · 3 mos',
     impact: ['Participated in Beach Cleanup Drive at Marine Lines, Mumbai, India.'],
     certificates: [
-      { alt: 'Certificate of Participation 1' },
-      { alt: 'Certificate of Participation 2' },
+      { src: '/ciu1.png', alt: 'Certificate of Participation 1' },
+      { src: '/ciu2.png', alt: 'Certificate of Participation 2' },
     ],
   },
 ];

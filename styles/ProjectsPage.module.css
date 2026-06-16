@@ -13,59 +13,6 @@
   }
 }
 
-/* Stats Grid */
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  width: 100%;
-  max-width: 500px;
-}
-
-.statCard {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  animation: scaleIn 0.6s ease forwards;
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.statCard:nth-child(1) { animation-delay: 0.6s; }
-.statCard:nth-child(2) { animation-delay: 0.7s; }
-.statCard:nth-child(3) { animation-delay: 0.8s; }
-
-@keyframes scaleIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.statCard:hover {
-  transform: scale(1.05);
-  border-color: rgba(var(--accent-color-rgb), 0.3);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.statNumber {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.statLabel {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-}
-
 /* Floating Decorations */
 .heroDecoration {
   position: absolute;
@@ -282,24 +229,7 @@
   .pageSubtitle {
     font-size: 1rem;
   }
-  
-  .statsGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  
-  .statCard {
-    padding: 1rem;
-  }
-  
-  .statNumber {
-    font-size: 1.8rem;
-  }
-  
-  .statLabel {
-    font-size: 0.8rem;
-  }
-  
+
   .container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -346,17 +276,7 @@
   .pageSubtitle {
     font-size: 0.95rem;
   }
-  
-  .statsGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 300px;
-  }
-  
-  .statCard {
-    padding: 1.5rem 1rem;
-  }
-  
+
   .container {
     gap: 1.25rem;
   }
@@ -394,6 +314,16 @@
   border-radius: 5px;
   padding: 0 6px;
   font-size: 0.9em;
+}
+
+.inlineLink {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.inlineLink:hover {
+  text-decoration: underline;
 }
 
 .ide {
@@ -511,13 +441,25 @@
   height: 100%;
   display: flex;
   align-items: center;
+  border: none;
   border-bottom: 1px solid transparent;
+  background: none;
   font-family: 'Source Sans Pro', sans-serif;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.panelTab:hover {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .panelTabActive {
   color: var(--text-color);
   border-bottom-color: var(--accent-color);
+}
+
+.panelTabActive:hover {
+  color: var(--text-color);
 }
 
 .panelActions {
@@ -589,6 +531,10 @@
   color: #4ec977;
 }
 
+.error {
+  color: #f14c4c;
+}
+
 .hint {
   margin-top: 0.85rem;
   color: rgba(255, 255, 255, 0.55);
@@ -609,49 +555,6 @@
   white-space: nowrap;
 }
 
-/* Filter chips inside the output */
-.outputToolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 1.1rem 0 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--border-color, rgba(255, 255, 255, 0.12));
-}
-
-.toolbarLabel {
-  color: #6a9955;
-  font-size: 0.78rem;
-  margin-right: 0.25rem;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.74rem;
-  font-family: 'JetBrains Mono', monospace;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.chip:hover {
-  color: #fff;
-  border-color: rgba(var(--accent-color-rgb, 249, 130, 108), 0.4);
-}
-
-.chipActive {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: #fff;
-}
-
 /* The rendered GUI output */
 .renderGrid {
   display: grid;
@@ -664,6 +567,49 @@
   animation: slideInUp 0.5s ease forwards;
   opacity: 0;
   transform: translateY(20px);
+}
+
+/* Interactive TERMINAL tab */
+.terminalConsole {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  max-height: 360px;
+  overflow-y: auto;
+  cursor: text;
+}
+
+.termOutput {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.terminalInputRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.4rem;
+  position: sticky;
+  bottom: 0;
+}
+
+.terminalInputField {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+}
+
+.terminalInputField::placeholder {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 @media screen and (max-width: 1024px) {
