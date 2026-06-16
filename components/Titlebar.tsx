@@ -80,6 +80,7 @@ const Titlebar = () => {
       items: [
         { label: '→ Home', shortcut: '', action: () => { router.push('/'); setActiveMenu(null); } },
         { label: '→ About', shortcut: '', action: () => { router.push('/about'); setActiveMenu(null); } },
+        { label: '→ Experience', shortcut: '', action: () => { router.push('/experience'); setActiveMenu(null); } },
         { label: '→ Projects', shortcut: '', action: () => { router.push('/projects'); setActiveMenu(null); } },
         { label: '→ Tech Stack', shortcut: '', action: () => { router.push('/techstack'); setActiveMenu(null); } },
         { label: '→ GitHub', shortcut: '', action: () => { router.push('/github'); setActiveMenu(null); } },

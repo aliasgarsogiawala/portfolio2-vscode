@@ -12,6 +12,7 @@ import styles from '@/styles/Explorer.module.css';
 const explorerItems = [
   { name: 'home.tsx', path: '/', icon: '/logos/react_icon.svg' },
   { name: 'about.html', path: '/about', icon: '/logos/html_icon.svg' },
+  { name: 'experience.ts', path: '/experience', icon: '/logos/typescript_icon.svg' },
   { name: 'contact.css', path: '/contact', icon: '/logos/css_icon.svg' },
   { name: 'projects.js', path: '/projects', icon: '/logos/js_icon.svg' },
   { name: 'techstack.json', path: '/techstack', icon: '/logos/json_icon.svg' },

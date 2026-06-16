@@ -8,6 +8,7 @@ import {
   VscCode,
   VscFiles,
   VscExtensions,
+  VscBriefcase,
 } from 'react-icons/vsc';
 
 import styles from '@/styles/Sidebar.module.css';
@@ -20,6 +21,7 @@ const sidebarTopItems = [
 ];
 
 const sidebarBottomItems = [
+  { Icon: VscBriefcase, path: '/experience', tooltip: 'Experience' },
   { Icon: VscAccount, path: '/about', tooltip: 'About Me' },
   { Icon: VscSettings, path: '/settings', tooltip: 'Settings' },
 ];

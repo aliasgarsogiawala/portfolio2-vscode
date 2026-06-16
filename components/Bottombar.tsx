@@ -14,6 +14,7 @@ import styles from '@/styles/Bottombar.module.css';
 const routeToLang: Record<string, string> = {
   '/': 'TypeScript React',
   '/about': 'HTML',
+  '/experience': 'TypeScript',
   '/contact': 'CSS',
   '/projects': 'JavaScript',
   '/techstack': 'JSON',

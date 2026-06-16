@@ -7,6 +7,7 @@ import styles from '@/styles/Breadcrumbs.module.css';
 const routeMeta: Record<string, { icon: string; label: string; parent?: string }> = {
   '/': { icon: '/logos/react_icon.svg', label: 'home.tsx' },
   '/about': { icon: '/logos/html_icon.svg', label: 'about.html' },
+  '/experience': { icon: '/logos/typescript_icon.svg', label: 'experience.ts' },
   '/contact': { icon: '/logos/css_icon.svg', label: 'contact.css' },
   '/projects': { icon: '/logos/js_icon.svg', label: 'projects.js' },
   '/techstack': { icon: '/logos/json_icon.svg', label: 'techstack.json' },

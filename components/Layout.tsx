@@ -22,6 +22,7 @@ interface LayoutProps {
 const COMMANDS = [
   { label: 'Go to Home', path: '/', icon: '/logos/react_icon.svg' },
   { label: 'Go to About', path: '/about', icon: '/logos/html_icon.svg' },
+  { label: 'Go to Experience', path: '/experience', icon: '/logos/typescript_icon.svg' },
   { label: 'Go to Projects', path: '/projects', icon: '/logos/js_icon.svg' },
   { label: 'Go to Tech Stack', path: '/techstack', icon: '/logos/json_icon.svg' },
   { label: 'Go to GitHub', path: '/github', icon: '/logos/markdown_icon.svg' },
