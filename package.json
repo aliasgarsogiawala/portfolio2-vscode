@@ -12,6 +12,7 @@
     "@splinetool/react-spline": "^4.0.0",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/nodemailer": "^6.4.17",
+    "feature-pipeline": "^1.0.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
     "next": "^15.2.3",

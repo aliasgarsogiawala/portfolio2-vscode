@@ -67,6 +67,20 @@
   background: var(--explorer-hover-bg);
 }
 
+.fileActive {
+  background: color-mix(in srgb, var(--accent-color) 16%, transparent);
+  color: #fff;
+  box-shadow: inset 2px 0 0 var(--accent-color);
+}
+
+.fileActive:hover {
+  background: color-mix(in srgb, var(--accent-color) 22%, transparent);
+}
+
+.fileActive p {
+  font-weight: 500;
+}
+
 .chevron {
   transition: transform 0.2s;
   flex-shrink: 0;

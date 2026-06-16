@@ -11,3 +11,37 @@
 a {
   text-decoration: none;
 }
+
+/* VS Code-style text selection: tinted with the active theme accent */
+::selection {
+  background: color-mix(in srgb, var(--accent-color) 35%, transparent);
+  color: inherit;
+}
+
+/* VS Code-style scrollbars across the whole app.
+   Component-scoped scrollbar rules (e.g. the editor pane) still win
+   via higher specificity, this just sets a consistent baseline. */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg, #424242);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--scrollbar-thumb-bg, #424242) 70%, white);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -18,13 +18,29 @@ const aliasgarInfo = {
   ],
   experience: [
     {
-      company: "Tessact",
-      role: "Software Engineer 2",
-      period: "Present",
+      company: "Tech Horizons Club",
+      role: "Co-Founder",
+      period: "Nov 2024 – Present",
       description: [
-        "Working with a lean team of 4 frontend engineers to build a next-gen video creation suite.",
-        "Leading the development efforts for bringing collaborative video reviewing and editing to the platform.",
-        "Maintaining the in-house component library, icon library and website.",
+        "Co-founded a student-led tech community for enthusiasts to learn, build, and grow together.",
+        "Drives startup, leadership, and community initiatives while leading web development for the club.",
+      ],
+    },
+    {
+      company: "Zillionite",
+      role: "Full-stack Developer (Internship)",
+      period: "Feb 2025 – Jan 2026",
+      description: [
+        "Built the complete Zillionite website from scratch using Next.js, Tailwind CSS, and Node.js.",
+        "Integrated online payments with Razorpay.",
+      ],
+    },
+    {
+      company: "OVERTURES InfoTech",
+      role: "Information Technology Intern",
+      period: "Jan 2023 – Jul 2023",
+      description: [
+        "Worked on website development, debugging, and SEO.",
       ],
     },
   ],
@@ -117,9 +133,11 @@ function generateResponse(message: string): string {
   }
 
   // Experience / Work / Job / Career
-  if (lowerMessage.includes('experience') || lowerMessage.includes('job') || lowerMessage.includes('career') || lowerMessage.includes('tessact')) {
-    const exp = aliasgarInfo.experience[0];
-    return `${aliasgarInfo.name} currently works as **${exp.role}** at **${exp.company}** (${exp.period}).\n\n${exp.description.map(d => `• ${d}`).join('\n')}`;
+  if (lowerMessage.includes('experience') || lowerMessage.includes('job') || lowerMessage.includes('career') || lowerMessage.includes('work') || lowerMessage.includes('intern')) {
+    const expList = aliasgarInfo.experience
+      .map(exp => `• **${exp.role}** at **${exp.company}** (${exp.period})`)
+      .join('\n');
+    return `Here's ${aliasgarInfo.firstName}'s experience:\n\n${expList}\n\nVisit the About page for the full timeline!`;
   }
 
   // Projects

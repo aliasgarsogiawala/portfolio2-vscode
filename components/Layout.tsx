@@ -222,7 +222,6 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
 
-      {/* Konami Code Easter Egg — Matrix Rain */}
       {konamiActive && (
         <div className={styles.konamiOverlay} onClick={() => setKonamiActive(false)}>
           <canvas id="konami-canvas" className={styles.konamiCanvas} />

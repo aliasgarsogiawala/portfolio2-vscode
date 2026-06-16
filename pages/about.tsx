@@ -19,20 +19,22 @@ const AboutPage = () => {
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Experience</h2>
-            {profile.experience.map((exp) => (
-              <div key={exp.company}>
-                <p className={styles.paragraph}>
-                  Currently at{' '}
-                  <span className={styles.highlight}>{exp.company}</span> as{' '}
-                  {exp.role}.
-                </p>
-                {exp.description.slice(1).map((line, i) => (
-                  <p key={i} className={styles.paragraph}>
-                    {line}
-                  </p>
-                ))}
-              </div>
-            ))}
+            <div className={styles.timeline}>
+              {profile.experience.map((exp) => (
+                <div key={`${exp.company}-${exp.role}`} className={styles.expItem}>
+                  <div className={styles.expHeader}>
+                    <span className={styles.expRole}>{exp.role}</span>
+                    <span className={styles.expPeriod}>{exp.period}</span>
+                  </div>
+                  <div className={styles.expCompany}>{exp.company}</div>
+                  <ul className={styles.expList}>
+                    {exp.description.map((line, i) => (
+                      <li key={i}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </section>
 
           <section className={styles.section}>

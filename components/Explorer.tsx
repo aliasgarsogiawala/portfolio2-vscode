@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import { VscChevronRight, VscExtensions } from 'react-icons/vsc';
 import { usePluginStore } from '@/src/plugins/store';
@@ -35,6 +36,7 @@ const Explorer = () => {
   const [contextMenu, setContextMenu] = useState<ContextMenu | null>(null);
   const contextMenuRef = useRef<HTMLDivElement>(null);
   const { installedPlugins } = usePluginStore();
+  const router = useRouter();
 
   const getInstalledPluginItems = () => {
     return installedPlugins.map(pluginId => {
@@ -53,6 +55,12 @@ const Explorer = () => {
     e.preventDefault();
     setContextMenu({ x: e.clientX, y: e.clientY, item });
   };
+
+  useEffect(() => {
+    if (resumeItems.some((item) => item.path === router.pathname)) {
+      setResumeOpen(true);
+    }
+  }, [router.pathname]);
 
   useEffect(() => {
     const handleClick = () => setContextMenu(null);
@@ -93,7 +101,7 @@ const Explorer = () => {
           {explorerItems.map((item) => (
             <Link href={item.path} key={item.name}>
               <div
-                className={styles.file}
+                className={`${styles.file} ${router.pathname === item.path ? styles.fileActive : ''}`}
                 onContextMenu={(e) => handleContextMenu(e, item)}
               >
                 <Image src={item.icon} alt={item.name} height={18} width={18} />
@@ -124,7 +132,7 @@ const Explorer = () => {
           {resumeItems.map((item) => (
             <Link href={item.path} key={item.name}>
               <div
-                className={styles.file}
+                className={`${styles.file} ${router.pathname === item.path ? styles.fileActive : ''}`}
                 onContextMenu={(e) => handleContextMenu(e, item)}
               >
                 <Image src={item.icon} alt={item.name} height={18} width={18} />

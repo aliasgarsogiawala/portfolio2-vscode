@@ -32,14 +32,22 @@ const Bottombar = () => {
 
   const lang = routeToLang[router.pathname] ?? 'TypeScript';
 
+  // Derive Ln/Col from the editor scroll position so the status bar
+  // reacts like a real editor instead of flickering random numbers.
   useEffect(() => {
-    // Randomly update line/col for VS Code feel
-    const interval = setInterval(() => {
-      setLine(Math.floor(Math.random() * 120) + 1);
-      setCol(Math.floor(Math.random() * 40) + 1);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const editor = document.getElementById('main-editor');
+    if (!editor) return;
+
+    const update = () => {
+      const lineHeight = 20;
+      setLine(Math.floor(editor.scrollTop / lineHeight) + 1);
+      setCol(1);
+    };
+
+    update();
+    editor.addEventListener('scroll', update, { passive: true });
+    return () => editor.removeEventListener('scroll', update);
+  }, [router.pathname]);
 
   return (
     <footer className={styles.bottomBar}>
