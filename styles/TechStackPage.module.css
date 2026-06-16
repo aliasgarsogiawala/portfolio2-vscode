@@ -9,13 +9,14 @@
 /* Hero Section */
 .heroSection {
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   padding: 4rem 2rem;
   background: linear-gradient(135deg,
-    rgba(249, 130, 108, 0.08) 0%,
-    rgba(249, 130, 108, 0.04) 50%,
+    rgba(var(--accent-color-rgb), 0.08) 0%,
+    rgba(var(--accent-color-rgb), 0.03) 50%,
     transparent 100%);
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
   overflow: hidden;
   text-align: center;
 }
@@ -29,7 +30,7 @@
   bottom: 0;
   background: linear-gradient(45deg,
     transparent 30%,
-    rgba(249, 130, 108, 0.02) 50%,
+    rgba(var(--accent-color-rgb), 0.04) 50%,
     transparent 70%);
   opacity: 0.5;
 }
@@ -39,13 +40,28 @@
   z-index: 2;
 }
 
+.fileChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  margin-bottom: 1.5rem;
+  font-family: 'JetBrains Mono', 'Monaco', monospace;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
 .title {
   font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 800;
   margin-bottom: 1.5rem;
   letter-spacing: -0.04em;
   line-height: 1.1;
-  background: linear-gradient(135deg, var(--accent-color), rgba(249, 130, 108, 0.7));
+  background: linear-gradient(135deg, var(--accent-color), rgba(var(--accent-color-rgb), 0.7));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,7 +70,8 @@
 .subtitle {
   font-size: 1.3rem;
   font-weight: 400;
-  color: var(--text-secondary);
+  color: var(--text-color);
+  opacity: 0.7;
   line-height: 1.7;
   max-width: 600px;
   margin: 0 auto 3rem;
@@ -62,12 +79,11 @@
 
 /* Category Navigation */
 .categoryNavigation {
-  background: var(--background-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .navigationTitle {
@@ -75,8 +91,18 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-color);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.navHint {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', 'Monaco', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  opacity: 0.6;
   margin-bottom: 1.5rem;
-  opacity: 0.8;
 }
 
 .categoryButtons {
@@ -87,12 +113,12 @@
 }
 
 .categoryButton {
-  background: var(--background-color);
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 10px;
   padding: 1rem 1.5rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -112,7 +138,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(249, 130, 108, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-color-rgb), 0.1), transparent);
   transition: left 0.6s ease;
 }
 
@@ -121,17 +147,16 @@
 }
 
 .categoryButton:hover {
-  border-color: var(--accent-color);
+  border-color: rgba(var(--accent-color-rgb), 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(249, 130, 108, 0.2);
 }
 
 .categoryButton.active {
   background: var(--accent-color);
   border-color: var(--accent-color);
-  color: white;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(249, 130, 108, 0.3);
+  box-shadow: 0 8px 24px rgba(var(--accent-color-rgb), 0.3);
 }
 
 .categoryEmoji {
@@ -155,14 +180,14 @@
 .statItem {
   text-align: center;
   padding: 1rem 1.5rem;
-  background: rgba(249, 130, 108, 0.05);
-  border: 1px solid rgba(249, 130, 108, 0.1);
-  border-radius: 12px;
+  background: rgba(var(--accent-color-rgb), 0.05);
+  border: 1px solid rgba(var(--accent-color-rgb), 0.15);
+  border-radius: 10px;
   transition: all 0.2s ease;
 }
 
 .statItem:hover {
-  background: rgba(249, 130, 108, 0.08);
+  background: rgba(var(--accent-color-rgb), 0.08);
   transform: translateY(-1px);
 }
 
@@ -175,7 +200,8 @@
 
 .statLabel {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-color);
+  opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -184,19 +210,19 @@
 .techGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .techCard {
-  background: var(--background-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
 }
 
 .techCard::before {
@@ -205,16 +231,16 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-color), rgba(249, 130, 108, 0.6));
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), rgba(var(--accent-color-rgb), 0.4));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .techCard:hover {
-  border-color: var(--accent-color);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(249, 130, 108, 0.15);
+  border-color: rgba(var(--accent-color-rgb), 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 .techCard:hover::before {
@@ -225,7 +251,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .techIcon {
@@ -242,102 +268,22 @@
 }
 
 .techName {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin: 0 0 0.5rem;
-  color: var(--text-color);
-}
-
-/* Download Button */
-.downloadButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 2rem;
-  font-size: 0.95rem;
-}
-
-.downloadButton:hover {
-  background: rgba(249, 130, 108, 0.9);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(249, 130, 108, 0.3);
-}
-
-/* Enhanced Tech Cards */
-.techCard {
-  background: var(--background-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  cursor: pointer;
-}
-
-.techCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-color), rgba(249, 130, 108, 0.6));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.techCard:hover {
-  border-color: var(--accent-color);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(249, 130, 108, 0.15);
-}
-
-.techCard:hover::before {
-  opacity: 1;
-}
-
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.techIcon {
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.techInfo {
-  flex: 1;
-}
-
-.techName {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.35rem;
   color: var(--text-color);
 }
 
 .techVersion {
   display: inline-block;
-  background: rgba(249, 130, 108, 0.1);
+  background: rgba(var(--accent-color-rgb), 0.12);
   color: var(--accent-color);
   padding: 0.2rem 0.5rem;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  border: 1px solid rgba(249, 130, 108, 0.2);
+  font-family: 'JetBrains Mono', 'Monaco', monospace;
+  border: 1px solid rgba(var(--accent-color-rgb), 0.2);
 }
 
 .cardActions {
@@ -352,8 +298,8 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: rgba(249, 130, 108, 0.1);
-  border: 1px solid rgba(249, 130, 108, 0.2);
+  background: rgba(var(--accent-color-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-color-rgb), 0.2);
   border-radius: 8px;
   color: var(--accent-color);
   text-decoration: none;
@@ -362,7 +308,7 @@
 
 .actionButton:hover {
   background: var(--accent-color);
-  color: white;
+  color: #fff;
 }
 
 .expandButton {
@@ -371,24 +317,33 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: var(--background-color);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
   border-radius: 8px;
-  color: var(--text-secondary);
+  color: var(--text-color);
+  opacity: 0.7;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .expandButton:hover {
-  border-color: var(--accent-color);
+  border-color: rgba(var(--accent-color-rgb), 0.4);
   color: var(--accent-color);
+  opacity: 1;
+}
+
+.techDescription {
+  color: var(--text-color);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .expandedContent {
   overflow: hidden;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border-color, rgba(255, 255, 255, 0.12));
 }
 
 .codeSection {
@@ -403,18 +358,43 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-color);
+  opacity: 0.85;
 }
 
 .codeWrapper {
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
 }
 
 .techDetails {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.6;
   margin-top: 0.5rem;
+  font-family: 'JetBrains Mono', 'Monaco', monospace;
+}
+
+/* Download Button */
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.downloadButton:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--accent-color-rgb), 0.35);
 }
 
 /* Terminal Styles */
@@ -423,24 +403,24 @@
   bottom: 2rem;
   right: 2rem;
   background: var(--accent-color);
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 0.75rem 1.25rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 20px rgba(249, 130, 108, 0.3);
+  box-shadow: 0 4px 20px rgba(var(--accent-color-rgb), 0.35);
   z-index: 1000;
   transition: all 0.2s ease;
 }
 
 .terminalToggle:hover {
-  background: rgba(249, 130, 108, 0.9);
+  filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(249, 130, 108, 0.4);
+  box-shadow: 0 6px 24px rgba(var(--accent-color-rgb), 0.45);
 }
 
 .terminal {
@@ -449,10 +429,10 @@
   right: 2rem;
   width: 500px;
   max-width: 90vw;
-  background: #1e1e1e;
-  border: 1px solid #333;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background: var(--editor-bg);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   z-index: 1001;
   overflow: hidden;
 }
@@ -462,15 +442,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: #2d2d2d;
-  border-bottom: 1px solid #333;
+  background: var(--tabs-bg, #1f2428);
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
 }
 
 .terminalTitle {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #fff;
+  color: var(--text-color);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -478,7 +458,8 @@
 .terminalClose {
   background: none;
   border: none;
-  color: #999;
+  color: var(--text-color);
+  opacity: 0.6;
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
@@ -486,8 +467,8 @@
 }
 
 .terminalClose:hover {
-  background: #444;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
 }
 
 .terminalBody {
@@ -500,13 +481,14 @@
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.85rem;
   line-height: 1.5;
 }
 
 .terminalLine {
-  color: #e6e6e6;
+  color: var(--text-color);
+  opacity: 0.85;
   margin-bottom: 0.5rem;
   white-space: pre-wrap;
 }
@@ -515,14 +497,14 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  border-top: 1px solid #333;
-  background: #262626;
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background: var(--tabs-bg, #1f2428);
 }
 
 .terminalPrompt {
   color: var(--accent-color);
   margin-right: 0.5rem;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-weight: bold;
 }
 
@@ -530,14 +512,15 @@
   flex: 1;
   background: none;
   border: none;
-  color: #fff;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  color: var(--text-color);
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.85rem;
   outline: none;
 }
 
 .terminalInputField::placeholder {
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.4;
 }
 
 /* Responsive Design */
@@ -545,7 +528,7 @@
   .layout {
     max-width: 1000px;
   }
-  
+
   .techGrid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
@@ -555,16 +538,16 @@
   .layout {
     padding: 1rem 0.5rem;
   }
-  
+
   .heroSection {
     padding: 3rem 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
-  
+
   .title {
     font-size: 2.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
@@ -573,30 +556,30 @@
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
-  
+
   .categoryButtons {
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
   }
-  
+
   .categoryButton {
     min-width: 240px;
   }
-  
+
   .techGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
-  
+
   .techCard {
     padding: 1.5rem;
   }
-  
+
   .categoryStats {
     gap: 1rem;
   }
-  
+
   .statItem {
     padding: 0.75rem 1rem;
   }
@@ -623,11 +606,11 @@
   .heroSection {
     padding: 2rem 1rem;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .techCard {
     padding: 1rem;
   }
@@ -638,7 +621,7 @@
   }
 
   .techName {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .terminal {
@@ -657,50 +640,30 @@
   }
 }
 
-/* Enhanced animations and transitions */
-.tooltip {
-  position: absolute;
-  background: var(--background-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-size: 0.85rem;
-  color: var(--text-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  max-width: 200px;
-  pointer-events: none;
-}
-
 /* Scrollbar styling for terminal */
 .terminalOutput::-webkit-scrollbar {
   width: 8px;
 }
 
 .terminalOutput::-webkit-scrollbar-track {
-  background: #333;
+  background: transparent;
 }
 
 .terminalOutput::-webkit-scrollbar-thumb {
-  background: #666;
+  background: var(--scrollbar-thumb-bg, #424242);
   border-radius: 4px;
 }
 
 .terminalOutput::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: color-mix(in srgb, var(--scrollbar-thumb-bg, #424242) 70%, white);
 }
 
 /* Loading states */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
 .loadingSpinner {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--border-color, rgba(255, 255, 255, 0.12));
   border-radius: 50%;
   border-top-color: var(--accent-color);
   animation: spin 1s ease-in-out infinite;
@@ -722,7 +685,6 @@
 
 .terminalInputField:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--accent-color);
 }
 
 /* Print styles */
@@ -731,11 +693,11 @@
   .terminal {
     display: none;
   }
-  
+
   .downloadButton {
     display: none;
   }
-  
+
   .expandedContent {
     display: block !important;
     height: auto !important;

@@ -517,6 +517,10 @@ git checkout -b feature/new-feature`,
         className={styles.heroSection}
       >
         <div className={styles.heroContent}>
+          <div className={styles.fileChip}>
+            <Image src="/logos/json_icon.svg" alt="" width={14} height={14} />
+            <span>techstack.json</span>
+          </div>
           <h1 className={styles.title}>Tech Stack</h1>
           <p className={styles.subtitle}>
             A comprehensive showcase of the technologies, frameworks, and tools that power my development workflow. 
@@ -539,6 +543,7 @@ git checkout -b feature/new-feature`,
       {/* Category Navigation */}
       <div className={styles.categoryNavigation}>
         <h2 className={styles.navigationTitle}>Explore Technologies</h2>
+        <span className={styles.navHint}>{'// click a category to filter dependencies'}</span>
         <div className={styles.categoryButtons}>
           {techCategories.map((category, index) => {
             let categoryId = category.title.toLowerCase();
@@ -667,10 +672,11 @@ git checkout -b feature/new-feature`,
                             language={tech.category === 'frontend' || tech.category === 'ui' ? 'jsx' : 'python'}
                             style={vscDarkPlus}
                             customStyle={{
-                              background: 'var(--background-color)',
+                              background: 'var(--editor-bg)',
                               fontSize: '0.85rem',
                               borderRadius: '8px',
                               padding: '1rem',
+                              margin: 0,
                             }}
                           >
                             {tech.codeSnippet}

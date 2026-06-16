@@ -94,6 +94,15 @@ export const projects: Project[] = [
     techStack: ['JavaScript', 'Canvas', 'Convex']
   },
   {
+    title: 'Uber Analytics Dashboard',
+    description: 'A Power BI dashboard analyzing Uber trip data — covering revenue trends, trip patterns, and rider/driver behavior — with a full PDF writeup of the findings.',
+    image: 'https://raw.githubusercontent.com/aliasgarsogiawala/Dashboards/main/Uber/uberoutput1.png',
+    link: 'https://github.com/aliasgarsogiawala/Dashboards/tree/main/Uber',
+    githubLink: 'https://github.com/aliasgarsogiawala/Dashboards/tree/main/Uber',
+    slug: 'uber-analytics-dashboard',
+    techStack: ['Power BI', 'DAX', 'Data Visualization']
+  },
+  {
     title: 'Portfolio 1.0',
     description:'A previous version of my portfolio for non tech people to view my work.',
     image: '/project-images/portfolio.png',
