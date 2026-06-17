@@ -48,6 +48,8 @@ const HELP_TEXT = [
   "  open <slug>         open a project's live site (or repo)",
   '  stats               a few numbers about this showcase',
   '  whoami               a little about me',
+  'resume              download resume as PDF',
+  '  resume docx         download resume as DOCX',
   '  github               jump to my GitHub profile',
   '  clear                wipe this terminal',
   '  help                 show this message again',
@@ -174,6 +176,30 @@ const ProjectsPage = () => {
         window.open(`https://github.com/${profile.githubUsername}`, '_blank', 'noopener,noreferrer');
         printTerm(`→ opening github.com/${profile.githubUsername}`, 'success');
         break;
+
+      case 'resume': {
+        const format = arg.toLowerCase() || 'pdf';
+        if (format === 'docx') {
+          const link = document.createElement('a');
+          link.href = '/resume/resume.docx';
+          link.download = 'Aliasgar_Sogiawala_Resume.docx';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          printTerm('→ downloading resume.docx', 'success');
+        } else if (format === 'pdf') {
+          const link = document.createElement('a');
+          link.href = '/resume/resume.pdf';
+          link.download = 'Aliasgar_Sogiawala_Resume.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          printTerm('→ downloading resume.pdf', 'success');
+        } else {
+          printTerm(`resume: unsupported format '${format}'. Use 'pdf' or 'docx'.`, 'error');
+        }
+        break;
+      }
 
       case 'clear':
         setTermHistory([]);
