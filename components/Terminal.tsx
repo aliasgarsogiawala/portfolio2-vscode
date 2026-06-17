@@ -66,8 +66,10 @@ const Terminal = () => {
     addLine(`$ ${trimmed}`, 'input');
 
     // Download commands
-    const downloadCmds = ['download resume.pdf', 'wget resume.pdf', 'curl -o resume.pdf', 'curl -O resume.pdf', 'get resume.pdf'];
-    if (downloadCmds.includes(lower)) {
+    const downloadPdfCmds = ['download resume.pdf', 'wget resume.pdf', 'curl -o resume.pdf', 'curl -O resume.pdf', 'get resume.pdf', 'download resume', 'resume pdf'];
+    const downloadDocxCmds = ['download resume.docx', 'wget resume.docx', 'curl -o resume.docx', 'curl -O resume.docx', 'get resume.docx', 'resume docx'];
+    
+    if (downloadPdfCmds.includes(lower)) {
       const link = document.createElement('a');
       link.href = '/api/resume';
       link.download = 'resume.pdf';
@@ -86,6 +88,26 @@ const Terminal = () => {
       addLine(`✓ 'resume.pdf' saved [15240/15240]`, 'success');
       return;
     }
+    
+    if (downloadDocxCmds.includes(lower)) {
+      const link = document.createElement('a');
+      link.href = '/resume/resume.docx';
+      link.download = 'Aliasgar_Sogiawala_Resume.docx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      const now = new Date();
+      addLine(`--${now.toISOString().slice(0, 10)} ${now.toLocaleTimeString()}--  https://aliasgar-vscode.vercel.app/resume/resume.docx`, 'output');
+      addLine(`Resolving host... done.`, 'output');
+      addLine(`HTTP request sent, awaiting response... 200 OK`, 'output');
+      addLine(`Length: 28492 (28K) [application/vnd.openxmlformats-officedocument.wordprocessingml.document]`, 'output');
+      addLine(`Saving to: 'resume.docx'`, 'output');
+      addLine(``, 'output');
+      addLine(`resume.docx         100%[===================>]  27.82K  --.-KB/s    in 0.002s`, 'output');
+      addLine(``, 'output');
+      addLine(`✓ 'resume.docx' saved [28492/28492]`, 'success');
+      return;
+    }
 
     if (lower === 'help') {
       addLine('Available commands:', 'info');
@@ -95,9 +117,10 @@ const Terminal = () => {
       addLine('    cd <dir>        Change directory', 'output');
       addLine('    cat <file>      Print file contents', 'output');
       addLine('  Resume:', 'output');
-      addLine('    download resume.pdf   Download resume', 'output');
-      addLine('    wget resume.pdf       Download using wget', 'output');
-      addLine('    curl -O resume.pdf    Download using curl', 'output');
+      addLine('    download resume.pdf   Download resume (PDF)', 'output');
+      addLine('    download resume.docx  Download resume (DOCX)', 'output');
+      addLine('    resume pdf            Download resume (PDF)', 'output');
+      addLine('    resume docx           Download resume (DOCX)', 'output');
       addLine('  Info:', 'output');
       addLine('    whoami          Display current user', 'output');
       addLine('    date            Print current date', 'output');
@@ -128,6 +151,7 @@ const Terminal = () => {
       addLine('-rw-r--r--  techstack.json', 'output');
       addLine('-rw-r--r--  github.md', 'output');
       addLine('-rw-r--r--  resume.pdf', 'output');
+      addLine('-rw-r--r--  resume.docx', 'output');
       return;
     }
 
@@ -159,8 +183,8 @@ const Terminal = () => {
 
     if (lower.startsWith('cat ')) {
       const file = lower.slice(4).trim();
-      if (file === 'resume.pdf' || file === 'resume') {
-        addLine('Binary file. Use: download resume.pdf', 'info');
+      if (file === 'resume.pdf' || file === 'resume.docx' || file === 'resume') {
+        addLine('Binary file. Use: download resume.pdf  or  download resume.docx', 'info');
       } else if (file === 'readme.md' || file === 'readme') {
         addLine(`# ${profile.name}'s Portfolio`, 'output');
         addLine(`## Full Stack Developer`, 'output');
